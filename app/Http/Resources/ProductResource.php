@@ -17,11 +17,15 @@ class ProductResource extends JsonResource
     {
         return [
             "item_id" => $this->id,
-            "item_name" => $this->ar_name !==null ? $this->ar_name : '',
-            "description" => $this->ar_description !==null ? $this->ar_description : '' ,
+            "item_ar_name" => $this->ar_name !==null ? $this->ar_name : '',
+            "item_en_name" => $this->ar_name !==null ? $this->en_name : '',
+            "ar_description" => $this->ar_description !==null ? $this->ar_description : '' ,
+            "en_description" => $this->en_description !==null ? $this->en_description : '' ,
             "price" => $this->price ?? '',
             "price_after_discount" => $this->price_after_discount ?? '',
             "discount" => $this->discount ?? '',
+            'category'=>CategoryResource::make($this->category),
+
             "sizes"=> SizeResource::collection($this->sizes),
             'review'=>ReviewResource::collection($this->review),
             "details"=> DetailsResource::collection($this->details),

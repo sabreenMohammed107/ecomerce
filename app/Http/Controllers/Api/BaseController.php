@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Response;
 class BaseController extends Controller
 {
 
@@ -21,9 +21,9 @@ class BaseController extends Controller
             'data'    => $result,
         ];
 
-
+        return Response::json($response,200);
         // return response()->json($response, 200);
-        return json_encode($response,200);
+        // return json_encode($response,200);
     }
 
 

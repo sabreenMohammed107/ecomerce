@@ -29,9 +29,10 @@ Route::post('login', 'App\Http\Controllers\Api\AuthController@login');
 
 Route::post('password/email', 'App\Http\Controllers\Api\AuthController@forgot');
 Route::post('password/reset', 'App\Http\Controllers\Api\AuthController@reset');
-Route::get('products', 'App\Http\Controllers\Api\ProductController@index');
+Route::get('products/{id}', 'App\Http\Controllers\Api\ProductController@index');
 Route::get('categories', 'App\Http\Controllers\Api\ProductController@categories');
 Route::get('latest-product', 'App\Http\Controllers\Api\ProductController@latest');
+Route::get('home-slider', 'App\Http\Controllers\Api\ProductController@homeSlider');
 Route::middleware('auth:api')->group(function () {
 
 

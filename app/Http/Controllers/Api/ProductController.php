@@ -5,20 +5,26 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\CategoryResource;
-
+use App\Http\Resources\HomeSliderResource;
 use App\Http\Resources\ProResource;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Home_slider;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends BaseController
 {
-    public function index(){
-        $products = Product::all();
+    public function index($id){
+        $products = Product::where('category_id',$id)->get();
 
         return $this->sendResponse(ProductResource::collection($products), 'All products Retrieved  Successfully');
+    }
+    public function homeSlider(){
+        $home=Home_slider::where('active',1)->orderBy("order", "Desc")->get();
+        return $this->sendResponse(HomeSliderResource::collection($home), 'All Home Images Retrieved  Successfully');
+
     }
 
 //GET ALL CATEGORIES
