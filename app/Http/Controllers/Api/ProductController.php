@@ -54,9 +54,9 @@ public function search(Request $request){
     if($request->get('search-name')) {
         $search = $request->get('search-name');
 
-        $products=Product::where('name','LIKE',"%$search%")->orWhere('description','LIKE',"%$search%")
+        $products=Product::where('ar_name','LIKE',"%$search%")->orWhere('en_name','LIKE',"%$search%")
         ->orwhereHas('category', function ($query) use ($search){
-            $query->where('name','LIKE',"%$search%")->orWhere('description','LIKE',"%$search%");
+            $query->where('ar_name','LIKE',"%$search%")->orWhere('en_name','LIKE',"%$search%");
         })->get();
         return $this->sendResponse(ProductResource::collection($products), 'All Search result Retrieved  Successfully');
     }else{

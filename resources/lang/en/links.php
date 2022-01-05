@@ -101,6 +101,7 @@ Please contact us for any complaints and inquiries.',
 /*-----------blogs----------*/
 'news'=>'News',
 'pop_tags'=>'Popular Tags',
+'read_more'=>'Read More',
 
 
 

@@ -24,7 +24,9 @@
     <!-- BASE CSS -->
     <link href="{{ asset('comassets/css/bootstrap.custom.min.css')}}" rel="stylesheet">
     <link href="{{ asset('comassets/css/style.css')}}" rel="stylesheet">
-
+    @if(isset($canonical))
+    <link rel="canonical" href="{{ $canonical }}" />
+    @endif
 
     @yield('style')
     <!-- YOUR CUSTOM CSS -->

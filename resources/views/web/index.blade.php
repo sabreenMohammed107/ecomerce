@@ -66,7 +66,7 @@
                     <div class="col-lg-2 col-md-2 col-xl-3">
                         <div class="gemy-item">
                             @forelse ($category->images as $img)
-                                <a href="#"> <img src="{{ asset('uploads/attachment') }}/{{ $img->img }}"
+                                <a href="{{ LaravelLocalization::localizeUrl('/products/'.$category->id) }}"> <img src="{{ asset('uploads/attachment') }}/{{ $img->img }}"
                                         class="img-fluid" /></a>
                             @break
                             @empty
@@ -74,7 +74,7 @@
                                 <img src="//via.placeholder.com/150x150" alt="" class="img-fluid" />
                     @endforelse
 
-                    <a href="#">
+                    <a href="{{ LaravelLocalization::localizeUrl('/products/'.$category->id) }}">
                         <h3>@if (LaravelLocalization::getCurrentLocale() === 'en')
                                 {{ $category->en_name }}
                             @else

@@ -41,6 +41,20 @@ Route::group(
 
         Route::get('/blogs', [App\Http\Controllers\Web\BlogsController::class, 'index']);
         Route::get('blogs/fetch_data', [App\Http\Controllers\Web\BlogsController::class, 'fetch_data']);
+        Route::get('/single-blog/{id}/{slug?}',[App\Http\Controllers\Web\BlogsController::class, 'singleBlog'])->name('single-blog.show');
+        Route::get('/single-blog/{id}/{slug?}', 'App\Http\Controllers\Web\BlogsController@singleBlog')->name('single-blog.show');
+
+
+        Route::get('/products/{id}', [App\Http\Controllers\Web\ProductsController::class, 'index']);
+        Route::get('/web-fetchProduct',  [App\Http\Controllers\Web\ProductsController::class, 'fetch_product'])->name('web-fetchProduct');
+        Route::get('fetch-product-filter','App\Http\Controllers\Web\ProductsController@fetch_data');
+        Route::get('/single-product/{id}',[App\Http\Controllers\Web\ProductsController::class, 'singleProduct'])->name('single-product');
+
+        // Route::get('/confirm',
+        // function () {
+        //     Session::flash('error', 'test');
+        //     return view('welcome');
+        // });
     });
 
 //...

@@ -20,8 +20,8 @@ class CategoryResource extends JsonResource
             "ar-name" => $this->ar_name !==null ? $this->ar_name : '',
             "en-name" => $this->en_name !==null ? $this->en_name : '',
 
-            "ar-description" => $this->ar_description !==null ? $this->ar_description : '' ,
-            "en-description" => $this->en_description !==null ? $this->en_description : '' ,
+            "ar-description" => $this->ar_description !==null ? strip_tags($this->ar_description) : '' ,
+            "en-description" => $this->en_description !==null ? strip_tags($this->en_description) : '' ,
 
             "images"=> ProImageResource::collection($this->images),
 

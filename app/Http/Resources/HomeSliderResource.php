@@ -22,15 +22,15 @@ class HomeSliderResource extends JsonResource
             "item_id" => $this->id,
             "en_title" => $this->en_title !==null ? $this->en_title : '',
             "ar_title" => $this->ar_title !==null ? $this->ar_title : '',
-            "en_text" => $this->en_text !==null ? $this->en_text : '' ,
-            "ar_text" => $this->ar_text !==null ? $this->ar_text : '' ,
+            "en_text" => $this->en_text !==null ? strip_tags($this->en_text) : '' ,
+            "ar_text" => $this->ar_text !==null ? strip_tags($this->ar_text) : '' ,
 
             "order" => $this->order ?? '',
             "active" => $this->active ?? '',
             "product"=> ProductResource::make($this->product),
             'category'=>CategoryResource::make($this->category),
 
-            "image"=> asset('uploads/home_sliders/' . $this->img) ?? '',
+            "image"=> asset('uploads/home_sliders/' . $this->image) ?? '',
 
 
             ];

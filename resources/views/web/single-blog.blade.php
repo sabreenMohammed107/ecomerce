@@ -10,33 +10,51 @@
             <div class="page_header">
                 <div class="breadcrumbs">
                     <ul>
-                        <li><a href="#">{{ __('links.home') }}</a></li>
-                        <li>{{ __('links.blog') }}</li>
-
+                        <li><a href="{{ LaravelLocalization::localizeUrl('/') }}">{{ __('links.home') }}</a></li>
+                        <li><a href="{{ LaravelLocalization::localizeUrl('/blogs') }}">{{ __('links.blog') }}</a></li>
+                        <li> @if (LaravelLocalization::getCurrentLocale() === 'en')
+                            {{ $blog->en_title }}
+                        @else
+                            {{ $blog->ar_title }}
+                        @endif</li>
                     </ul>
                 </div>
-                <h1> {{ __('links.blog') }} &amp; {{ __('links.news') }}</h1>
             </div>
             <!-- /page_header -->
             <div class="row">
                 <div class="col-lg-9">
-                    <div class="widget search_blog d-block d-sm-block d-md-block d-lg-none">
-                        <div class="form-group">
-                            <input type="text" name="search" id="search" class="form-control" placeholder="Search..">
-                            <button type="submit"><i class="ti-search"></i></button>
+                    <div class="singlepost">
+                        <figure><img alt="{{ asset('uploads/blogs') }}/{{$blog->img}}" class="img-fluid w-100" style="height: 350px" src="{{ asset('uploads/blogs') }}/{{$blog->img}}">
+                        </figure>
+                        <h1> @if (LaravelLocalization::getCurrentLocale() === 'en')
+                            {{ $blog->en_title }}
+                        @else
+                            {{ $blog->ar_title }}
+                        @endif</h1>
+
+                        <!-- /post meta -->
+                        <div class="post-content">
+                            {{-- <div class="dropcaps"> --}}
+                                @if (LaravelLocalization::getCurrentLocale() === 'en')
+                                {!!$blog->en_text !!}
+                            @else
+                            {!!$blog->ar_text !!}
+                            @endif
+                           {{-- </div> --}}
+
+
                         </div>
+                        <!-- /post -->
                     </div>
-                    <!-- /widget -->
-
-                    <div id="table_data">
-
-                        @include('web.blogList')
+                    <!-- /single-post -->
 
 
 
-                    </div>
+
+
                 </div>
                 <!-- /col -->
+
 
                 <aside class="col-lg-3">
                     <div class="widget search_blog d-none d-sm-none d-md-none d-lg-block">
@@ -54,8 +72,9 @@
                             @foreach ($latestPosts as $latest)
                                 <li>
                                     <div class="alignleft">
-                                        <a href="{{ LaravelLocalization::localizeUrl('/single-blog/'.$latest->id.'/'.$latest->slug) }}"><img src="{{ asset('uploads/blogs') }}/{{ $latest->img }}"
-                                                alt=""></a>
+                                        <a
+                                            href="{{ LaravelLocalization::localizeUrl('/single-blog/' . $latest->id . '/' . $latest->slug) }}"><img
+                                                src="{{ asset('uploads/blogs') }}/{{ $latest->img }}" alt=""></a>
                                     </div>
                                     <small>
                                         @if (LaravelLocalization::getCurrentLocale() === 'en')
@@ -64,7 +83,8 @@
                                             {{ $latest->ar_title }}
                                         @endif
                                     </small>
-                                    <h3><a href="{{ LaravelLocalization::localizeUrl('/single-blog/'.$latest->id.'/'.$latest->slug) }}" title="">
+                                    <h3><a href="{{ LaravelLocalization::localizeUrl('/single-blog/' . $latest->id . '/' . $latest->slug) }}"
+                                            title="">
                                             @if (LaravelLocalization::getCurrentLocale() === 'en')
                                                 {{ Illuminate\Support\Str::limit(strip_tags($latest->en_text ?? ''), $limit = 50, $end = '...') }}
                                             @else
@@ -73,8 +93,6 @@
                                         </a></h3>
                                 </li>
                             @endforeach
-
-
                         </ul>
                     </div>
                     <!-- /widget -->
@@ -88,11 +106,13 @@
                                 $products = App\Models\Product::where('category_id', $category->id)->get();
                                 $count = $products->count();
                                 ?>
-                                <li><a href="#"> @if (LaravelLocalization::getCurrentLocale() === 'en')
-                                    {{ $category->en_name }}
-                                @else
-                                    {{ $category->ar_name }} <span>({{ $count }})</span></a></li>
-@endif
+                                <li><a href="#">
+                                        @if (LaravelLocalization::getCurrentLocale() === 'en')
+                                            {{ $category->en_name }}
+                                        @else
+                                            {{ $category->ar_name }} <span>({{ $count }})</span>
+                                    </a></li>
+                            @endif
                             @endforeach
 
                         </ul>
@@ -112,26 +132,11 @@
                             @endif
                         @endif </a>
                             @endforeach
-{{-- @foreach ($blogs as $blog)
-@foreach ($blog->tag->distinct() as $tag)
-<a href="#">@if (LaravelLocalization::getCurrentLocale() === 'en')
-    {{ $tag->en_name }}
-@else
-    {{ $tag->ar_name }}
-@endif </a>
-@endforeach
-@endforeach --}}
-                            {{-- <a href="#">Food</a>
-                            <a href="#">Bars</a>
-                            <a href="#">Cooktails</a>
-                            <a href="#">Shops</a>
-                            <a href="#">Best Offers</a>
-                            <a href="#">Transports</a>
-                            <a href="#">Restaurants</a> --}}
                         </div>
                     </div>
                     <!-- /widget -->
                 </aside>
+
                 <!-- /aside -->
             </div>
             <!-- /row -->
@@ -139,27 +144,4 @@
         <!-- /container -->
     </main>
     <!--/main-->
-
-@endsection
-@section('scripts')
-    <script>
-        $(document).ready(function() {
-
-            $(document).on('click', '.pagination a', function(event) {
-                event.preventDefault();
-                var page = $(this).attr('href').split('page=')[1];
-                fetch_data(page);
-            });
-
-            function fetch_data(page) {
-                $.ajax({
-                    url: "/blogs/fetch_data?page=" + page,
-                    success: function(data) {
-                        $('#table_data').html(data);
-                    }
-                });
-            }
-
-        });
-    </script>
 @endsection

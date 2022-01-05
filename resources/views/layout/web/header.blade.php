@@ -84,7 +84,7 @@
                                 <div id="menu">
                                     <ul>
                                         @foreach ($categories as $category)
-                                            <li><span><a href="#0">
+                                            <li><span><a href="{{ LaravelLocalization::localizeUrl('/products/'.$category->id) }}">
                                                         @if (LaravelLocalization::getCurrentLocale() === 'en')
                                                             {{ $category->en_name }}
                                                         @else

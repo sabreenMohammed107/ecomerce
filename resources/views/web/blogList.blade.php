@@ -3,13 +3,14 @@
 <div class="col-md-6">
     <article class="blog">
         <figure>
-            <a href="blog-post.html"><img style="width: 100%" src="{{ asset('uploads/blogs') }}/{{$blog->img}}" alt="{{ asset('uploads/blogs') }}/{{$blog->img}}">
-                <div class="preview"><span>Read more</span></div>
+            <a href="{{ LaravelLocalization::localizeUrl('/single-blog/'.$blog->id.'/'.$blog->slug) }}"><img style="width: 100%" src="{{ asset('uploads/blogs') }}/{{$blog->img}}" alt="{{ asset('uploads/blogs') }}/{{$blog->img}}">
+                <div class="preview"><span>{{ __('links.read_more') }} </span></div>
             </a>
         </figure>
         <div class="post_info">
 
-            <h2><a href="blog-post.html">@if (LaravelLocalization::getCurrentLocale() === 'en')
+            <h2><a href="{{ LaravelLocalization::localizeUrl('/single-blog/'.$blog->id.'/'.$blog->slug) }}">
+                @if (LaravelLocalization::getCurrentLocale() === 'en')
                 {{ $blog->en_title }}
             @else
                 {{ $blog->ar_title }}

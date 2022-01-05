@@ -19,8 +19,8 @@ class DetailsResource extends JsonResource
             "ar-name" => $this->key_ar_name ?? '',
             "en-name" => $this->key_en_name ?? '',
 
-            'ar-desc'=>$this->ar_value_text ?? '',
-            'en-desc'=>$this->en_value_text ?? '',
+            'ar-desc'=>strip_tags($this->ar_value_text) ?? '',
+            'en-desc'=>strip_tags($this->en_value_text) ?? '',
 
             ];
     }
