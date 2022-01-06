@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\Size;
 use Illuminate\Http\Request;
@@ -49,7 +50,7 @@ class ProductsController extends Controller
         $products = $filtters->paginate(2);
         $category = Category::where('id', $request->get('category'))->first();
 
-        return view('web.productList', compact('products','category'))->render();
+        return view('web.productList', compact('products', 'category'))->render();
 
     }
     public function fetch_product(Request $request)
@@ -63,7 +64,7 @@ class ProductsController extends Controller
             if (!empty($request->get("sizes"))) {
 
                 $filtters->with('sizes')->whereHas('sizes', function ($query) use ($request) {
-                    $query->whereIn('product_sizes.id',$request->get("sizes"));
+                    $query->whereIn('product_sizes.id', $request->get("sizes"));
                 });
             }
             if (!empty($request->get("colors"))) {
@@ -85,9 +86,19 @@ class ProductsController extends Controller
         }
     }
 
-    public function singleProduct($id){
-        $product=Product::where('id', $id)->first();
-
-        return view($this->viewName.'single-product',compact('product'));
+    public function singleProduct($id)
+    {
+        // $product = Product::has('images')->where('id', 3)->first();
+        // $category = Category::where('id', 3)->first();
+        $row = Product::find($id);
+        $images=Image::all();
+        $related = array();
+        $proRelates = Product::orderBy("created_at", "Desc")->get();
+        foreach ($proRelates as $product) {
+            $product->rate = $product->avgRating();
+            // $product->images = $product->images->first();
+            array_push($related, $product);
+        }
+        return view($this->viewName . 'single-product', compact('row','images', 'related'));
     }
 }

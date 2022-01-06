@@ -25,7 +25,7 @@ class ProductResource extends JsonResource
             "price_after_discount" => number_format((float) $this->price_after_discount, 1)  ?? '',
             "discount" => number_format((float) $this->discount, 1)  ?? '',
             'category'=>CategoryResource::make($this->category),
-
+"rate"=> $this->rate,
             "sizes"=> SizeResource::collection($this->sizes),
             'review'=>ReviewResource::collection($this->review),
             "details"=> DetailsResource::collection($this->details),

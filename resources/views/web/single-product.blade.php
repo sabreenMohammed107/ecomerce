@@ -13,8 +13,7 @@
                 <div class="all">
                     <div class="slider">
                         <div class="owl-carousel owl-theme main">
-                            @foreach($product->images as $key => $img)
-
+                            @foreach($row->images as $key => $img)
                             <div style="background-image: url( {{ asset('uploads/attachment') }}/{{$img->img ?? ''}});" class="item-box"></div>
                             @endforeach
 
@@ -25,7 +24,7 @@
                     </div>
                     <div class="slider-two">
                         <div class="owl-carousel owl-theme thumbs">
-                            @foreach($product->images as $key => $img)
+                            @foreach($row->images as $key => $img)
 
                             <div style="background-image: url({{ asset('uploads/attachment') }}/{{$img->img ?? ''}});" class="item {{ $key == 0 ? 'active' : '' }} "></div>
                             @endforeach
@@ -47,36 +46,59 @@
                 </div>
                 <!-- /page_header -->
                 <div class="prod_info">
-                    <h1>Armor Air X Fear</h1>
-                    <span class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i><em>4 reviews</em></span>
-                    <p><small>SKU: MTKRY-001</small><br>Sed ex labitur adolescens scriptorem. Te saepe verear tibique sed. Et wisi ridens vix, lorem iudico blandit mel cu. Ex vel sint zril oportere, amet wisi aperiri te cum.</p>
+                    <h1>@if (LaravelLocalization::getCurrentLocale() === 'en')
+                        {{ $row->en_name }}
+                    @else
+                        {{ $row->ar_name }}
+                    @endif</h1>
+                    <span class="rating">
+                        @foreach (range(1, 5) as $i)
+
+                                @if ($row->avgRating() >= $i)
+                                <i class="icon-star voted"></i>
+                                @else
+                                <i class="icon-star"></i>
+                                @endif
+                                @endforeach
+
+                        <em>{{$row->review->count()}} {{ __('links.reviews') }}</em></span>
+                    <p>
+                        @if (LaravelLocalization::getCurrentLocale() === 'en')
+                        {{Illuminate\Support\Str::limit(strip_tags($row->en_description ?? ''), $limit = 100, $end = '...')}}
+                    @else
+                    {{Illuminate\Support\Str::limit(strip_tags($row->ar_description ?? ''), $limit = 100, $end = '...')}}
+                    @endif                    </p>
                     <div class="prod_options">
                         <div class="row">
-                            <label class="col-xl-5 col-lg-5  col-md-6 col-6 pt-0"><strong>Color</strong></label>
+                            <label class="col-xl-5 col-lg-5  col-md-6 col-6 pt-0"><strong>{{ __('links.color') }}</strong></label>
                             <div class="col-xl-4 col-lg-5 col-md-6 col-6 colors">
                                 <ul>
-                                    <li><a href="#0" class="color color_1 active"></a></li>
-                                    <li><a href="#0" class="color color_2"></a></li>
-                                    <li><a href="#0" class="color color_3"></a></li>
-                                    <li><a href="#0" class="color color_4"></a></li>
+                                    @foreach($row->color as $key => $color)
+
+                                    <li><a href="#0" class="color  {{ $key == 0 ? 'active' : '' }}" style="background-color: {{$color->colorid}}"></a></li>
+                                    @endforeach
+
+
                                 </ul>
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-xl-5 col-lg-5 col-md-6 col-6"><strong>Size</strong> - Size Guide <a href="#0" data-bs-toggle="modal" data-bs-target="#size-modal"><i class="ti-help-alt"></i></a></label>
+                            <label class="col-xl-5 col-lg-5 col-md-6 col-6"><strong>{{ __('links.size') }}</strong> - {{ __('links.size_guide') }} <a href="#0" data-bs-toggle="modal" data-bs-target="#size-modal"><i class="ti-help-alt"></i></a></label>
                             <div class="col-xl-4 col-lg-5 col-md-6 col-6">
                                 <div class="custom-select-form">
                                     <select class="wide">
-                                        <option value="" selected>Small (S)</option>
-                                        <option value="">M</option>
+                                        @foreach($row->sizes as $key => $size)
+                                        <option value="{{$size->id}}" >{{$size->ar_name}}</option>
+                                        @endforeach
+                                        {{-- <option value="">M</option>
                                         <option value=" ">L</option>
-                                        <option value=" ">XL</option>
+                                        <option value=" ">XL</option> --}}
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-xl-5 col-lg-5  col-md-6 col-6"><strong>Quantity</strong></label>
+                            <label class="col-xl-5 col-lg-5  col-md-6 col-6"><strong>{{ __('links.quantity') }}</strong></label>
                             <div class="col-xl-4 col-lg-5 col-md-6 col-6">
                                 <div class="numbers-row">
                                     <input type="text" value="1" id="quantity_1" class="qty2" name="quantity_1">
@@ -86,10 +108,13 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-5 col-md-6">
-                            <div class="price_main"><span class="new_price">$148.00</span><span class="old_price">$160.00</span></div>
+                            <div class="price_main"><span class="new_price">{{ $row->price_after_discount }}</span>
+                                <span class="old_price">@if($row->discount)
+                                    {{ $row->price }}
+                                @endif</span></div>
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <div class="btn_add_to_cart"><a href="#0" class="btn_1">Add to Cart</a></div>
+                            <div class="btn_add_to_cart"><a href="#0" class="btn_1">{{ __('links.add_cart') }}</a></div>
                         </div>
                     </div>
                 </div>
@@ -97,10 +122,10 @@
                 <div class="product_actions">
                     <ul>
                         <li>
-                            <a href="#"><i class="ti-heart"></i><span>Add to Wishlist</span></a>
+                            <a href="#"><i class="ti-heart"></i><span>{{ __('links.add_favorites') }}</span></a>
                         </li>
                         <li>
-                            <a href="#"><i class="ti-control-shuffle"></i><span>Share</span></a>
+                            <a href="#"><i class="ti-control-shuffle"></i><span>{{ __('links.share_product') }}</span></a>
                         </li>
                     </ul>
                 </div>
@@ -115,10 +140,10 @@
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a id="tab-A" href="#pane-A" class="nav-link active" data-bs-toggle="tab" role="tab">Description</a>
+                    <a id="tab-A" href="#pane-A" class="nav-link active" data-bs-toggle="tab" role="tab">{{ __('links.description') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a id="tab-B" href="#pane-B" class="nav-link" data-bs-toggle="tab" role="tab">Reviews</a>
+                    <a id="tab-B" href="#pane-B" class="nav-link" data-bs-toggle="tab" role="tab">{{ __('links.reviews') }}</a>
                 </li>
             </ul>
         </div>
@@ -131,7 +156,7 @@
                     <div class="card-header" role="tab" id="heading-A">
                         <h5 class="mb-0">
                             <a class="collapsed" data-bs-toggle="collapse" href="#collapse-A" aria-expanded="false" aria-controls="collapse-A">
-                                Description
+                                {{ __('links.description') }}
                             </a>
                         </h5>
                     </div>
@@ -139,11 +164,11 @@
                         <div class="card-body">
                             <div class="row justify-content-between">
                                 <div class="col-lg-12">
-                                    <h3>Details</h3>
-                                    <p>Lorem ipsum dolor sit amet, in eleifend <strong>inimicus elaboraret</strong> his, harum efficiendi mel ne. Sale percipit vituperata ex mel, sea ne essent aeterno sanctus, nam ea laoreet civibus electram. Ea vis eius explicari. Quot iuvaret ad has.</p>
-                                    <p>Vis ei ipsum conclusionemque. Te enim suscipit recusabo mea, ne vis mazim aliquando, everti insolens at sit. Cu vel modo unum quaestio, in vide dicta has. Ut his laudem explicari adversarium, nisl <strong>laboramus hendrerit</strong> te his, alia lobortis vis ea.</p>
-                                    <p>Perfecto eleifend sea no, cu audire voluptatibus eam. An alii praesent sit, nobis numquam principes ea eos, cu autem constituto suscipiantur eam. Ex graeci elaboraret pro. Mei te omnis tantas, nobis viderer vivendo ex has.</p>
-                                </div>
+                                    @if (LaravelLocalization::getCurrentLocale() === 'en')
+                                    {!! $row->en_description !!}
+                                @else
+                                    {!! $row->ar_description !!}
+                                @endif  </div>
 
                             </div>
                         </div>
@@ -154,59 +179,40 @@
                     <div class="card-header" role="tab" id="heading-B">
                         <h5 class="mb-0">
                             <a class="collapsed" data-bs-toggle="collapse" href="#collapse-B" aria-expanded="false" aria-controls="collapse-B">
-                                Reviews
+                                {{ __('links.reviews') }}
                             </a>
                         </h5>
                     </div>
                     <div id="collapse-B" class="collapse" role="tabpanel" aria-labelledby="heading-B">
                         <div class="card-body">
                             <div class="row justify-content-between">
+                                @foreach($row->review as $key => $review)
                                 <div class="col-lg-6">
                                     <div class="review_content">
                                         <div class="clearfix add_bottom_10">
-                                            <span class="rating"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><em>5.0/5.0</em></span>
-                                            <em>Published 54 minutes ago</em>
+                                            <span class="rating">
+                                                @foreach (range(1, 5) as $i)
+
+                                                @if ($review->rate_no >= $i)
+                                                <i class="icon-star voted"></i>
+                                                @else
+                                                {{-- <i class="icon-star"></i>x --}}
+                                                @endif
+                                                @endforeach
+                                                    <em>{{$review->rate_no}}/5.0</em></span>
+                                            <em>Published @if($review->created_at){{$review->created_at->diffForHumans() }} @endif</em>
                                         </div>
-                                        <h4>"Commpletely satisfied"</h4>
-                                        <p>Eos tollit ancillae ea, lorem consulatu qui ne, eu eros eirmod scaevola sea. Et nec tantas accusamus salutatus, sit commodo veritus te, erat legere fabulas has ut. Rebum laudem cum ea, ius essent fuisset ut. Viderer petentium cu his.</p>
+
+                                        <p>
+{!!$review->ar_comment!!}                                        </p>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="review_content">
-                                        <div class="clearfix add_bottom_10">
-                                            <span class="rating"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star empty"></i><i class="icon-star empty"></i><em>4.0/5.0</em></span>
-                                            <em>Published 1 day ago</em>
-                                        </div>
-                                        <h4>"Always the best"</h4>
-                                        <p>Et nec tantas accusamus salutatus, sit commodo veritus te, erat legere fabulas has ut. Rebum laudem cum ea, ius essent fuisset ut. Viderer petentium cu his.</p>
-                                    </div>
-                                </div>
+                                @endforeach
+
                             </div>
                             <!-- /row -->
-                            <div class="row justify-content-between">
-                                <div class="col-lg-6">
-                                    <div class="review_content">
-                                        <div class="clearfix add_bottom_10">
-                                            <span class="rating"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star empty"></i><em>4.5/5.0</em></span>
-                                            <em>Published 3 days ago</em>
-                                        </div>
-                                        <h4>"Outstanding"</h4>
-                                        <p>Eos tollit ancillae ea, lorem consulatu qui ne, eu eros eirmod scaevola sea. Et nec tantas accusamus salutatus, sit commodo veritus te, erat legere fabulas has ut. Rebum laudem cum ea, ius essent fuisset ut. Viderer petentium cu his.</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="review_content">
-                                        <div class="clearfix add_bottom_10">
-                                            <span class="rating"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><em>5.0/5.0</em></span>
-                                            <em>Published 4 days ago</em>
-                                        </div>
-                                        <h4>"Excellent"</h4>
-                                        <p>Sit commodo veritus te, erat legere fabulas has ut. Rebum laudem cum ea, ius essent fuisset ut. Viderer petentium cu his.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /row -->
-                            <p class="text-end"><a href="leave-review.html" class="btn_1">Leave a review</a></p>
+
+                            <p class="text-end"><a href="leave-review.html" class="btn_1">{{ __('links.leave_review') }}</a></p>
                         </div>
                         <!-- /card-body -->
                     </div>
@@ -221,133 +227,52 @@
 
     <div class="container margin_60_35">
         <div class="main_title">
-            <h2>Related</h2>
-            <span>Products</span>
+            <h2>{{ __('links.related') }}</h2>
+            <span>{{ __('links.products') }}</span>
             <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
         </div>
         <div class="owl-carousel owl-theme products_carousel">
+            @foreach ($related as $rel)
             <div class="item">
+
                 <div class="grid_item">
 
                     <figure>
                         <a href="product-detail-1.html">
-                            <img class="owl-lazy" src="img/products/product_placeholder_square_medium.jpg" data-src="img/products/shoes/4.jpg" alt="">
+                            <img class="owl-lazy" src="{{ asset('uploads/attachment') }}/{{$rel->images[0]->img}}" data-src="{{ asset('uploads/attachment') }}/{{$rel->images[0]->img}}" alt="">
                         </a>
                     </figure>
-                    <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                    <a href="product-detail-1.html">
-                        <h3>ACG React Terra</h3>
-                    </a>
-                    <div class="price_box">
-                        <span class="new_price">$110.00</span>
-                    </div>
-                    <ul>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
-                    </ul>
-                </div>
-                <!-- /grid_item -->
-            </div>
-            <!-- /item -->
-            <div class="item">
-                <div class="grid_item">
+                    <div class="rating">
+                        @foreach (range(1, 5) as $i)
 
-                    <figure>
-                        <a href="product-detail-1.html">
-                            <img class="owl-lazy" src="img/products/product_placeholder_square_medium.jpg" data-src="img/products/shoes/5.jpg" alt="">
-                        </a>
-                    </figure>
-                    <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
+                        @if ($rel->avgRating() >= $i)
+                        <i class="icon-star voted"></i>
+                        @else
+                        <i class="icon-star"></i>
+                        @endif
+                        @endforeach
+                                        </div>
                     <a href="product-detail-1.html">
-                        <h3>Air Zoom Alpha</h3>
+                        <h3>@if (LaravelLocalization::getCurrentLocale() === 'en')
+                            {{ $rel->en_name }}
+                        @else
+                            {{ $rel->ar_name }}
+                        @endif</h3>
                     </a>
                     <div class="price_box">
-                        <span class="new_price">$140.00</span>
+                        <span class="new_price">{{ $rel->price_after_discount }}</span>
                     </div>
                     <ul>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
+                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="{{ __('links.add_favorites') }}"><i class="ti-heart"></i><span>{{ __('links.add_favorites') }}</span></a></li>
+                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="{{ __('links.share_product') }}"><i class="ti-control-shuffle"></i><span>{{ __('links.share_product') }}</span></a></li>
+                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="{{ __('links.add_cart') }}"><i class="ti-shopping-cart"></i><span>{{ __('links.add_cart') }}</span></a></li>
                     </ul>
                 </div>
-                <!-- /grid_item -->
-            </div>
-            <!-- /item -->
-            <div class="item">
-                <div class="grid_item">
 
-                    <figure>
-                        <a href="product-detail-1.html">
-                            <img class="owl-lazy" src="img/products/product_placeholder_square_medium.jpg" data-src="img/products/shoes/8.jpg" alt="">
-                        </a>
-                    </figure>
-                    <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                    <a href="product-detail-1.html">
-                        <h3>Air Color 720</h3>
-                    </a>
-                    <div class="price_box">
-                        <span class="new_price">$120.00</span>
-                    </div>
-                    <ul>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
-                    </ul>
-                </div>
                 <!-- /grid_item -->
             </div>
             <!-- /item -->
-            <div class="item">
-                <div class="grid_item">
-
-                    <figure>
-                        <a href="product-detail-1.html">
-                            <img class="owl-lazy" src="img/products/product_placeholder_square_medium.jpg" data-src="img/products/shoes/2.jpg" alt="">
-                        </a>
-                    </figure>
-                    <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                    <a href="product-detail-1.html">
-                        <h3>Okwahn II</h3>
-                    </a>
-                    <div class="price_box">
-                        <span class="new_price">$90.00</span>
-                        <span class="old_price">$170.00</span>
-                    </div>
-                    <ul>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
-                    </ul>
-                </div>
-                <!-- /grid_item -->
-            </div>
-            <!-- /item -->
-            <div class="item">
-                <div class="grid_item">
-
-                    <figure>
-                        <a href="product-detail-1.html">
-                            <img class="owl-lazy" src="img/products/product_placeholder_square_medium.jpg" data-src="img/products/shoes/3.jpg" alt="">
-                        </a>
-                    </figure>
-                    <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
-                    <a href="product-detail-1.html">
-                        <h3>Air Wildwood ACG</h3>
-                    </a>
-                    <div class="price_box">
-                        <span class="new_price">$75.00</span>
-                        <span class="old_price">$155.00</span>
-                    </div>
-                    <ul>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to compare</span></a></li>
-                        <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
-                    </ul>
-                </div>
-                <!-- /grid_item -->
-            </div>
-            <!-- /item -->
+            @endforeach
         </div>
         <!-- /products_carousel -->
     </div>

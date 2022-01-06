@@ -102,7 +102,19 @@ Please contact us for any complaints and inquiries.',
 'news'=>'News',
 'pop_tags'=>'Popular Tags',
 'read_more'=>'Read More',
+/*------------Product------------*/
+'filter'=>'Filter',
+'reset' =>'Reset',
+'reviews'=>'reviews',
+'size'=>'Size',
+'size_guide'=>'Size Guide',
+'color'=>'Color',
+'quantity'=>'Quantity',
+'description'=>'Description',
+'reviews'=>'Reviews',
+'related'=>'Related',
 
+'leave_review'=>'Leave a review',
 
 
 

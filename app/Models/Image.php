@@ -22,4 +22,6 @@ class Image extends Model
     {
         return $this->morphedByMany(Category::class, 'taggable');
     }
+
+
 }

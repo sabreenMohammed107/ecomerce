@@ -109,7 +109,20 @@ return [
 'pop_tags'=>'الكلمات الشائعة ',
 'read_more'=>'إقرأ المزيد',
 
+/*------------Product------------*/
+'filter'=>'بحث',
+'reset' =>'الغاء',
+'reviews'=>'تقيمات',
+'size'=>'مقاس',
+'size_guide'=>'دليل المقاسات',
+'color'=>'اللون',
+'quantity'=>'الكمية',
+'description'=>'الوصف',
+'reviews'=>'التقييمات',
+'related'=>'ذات صله',
 
+
+'leave_review'=>'اكتب تعليق',
 
 
 

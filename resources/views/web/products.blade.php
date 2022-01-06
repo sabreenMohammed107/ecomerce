@@ -13,7 +13,7 @@
                     <div class="breadcrumbs">
                         <ul>
                             <li><a href="{{ LaravelLocalization::localizeUrl('/') }}">{{ __('links.home') }}</a></li>
-                            <li><a href="#">Category</a></li>
+                            <li><a href="{{ LaravelLocalization::localizeUrl('/categories') }}">{{ __('links.categories') }}</a></li>
 
                         </ul>
                     </div>
@@ -115,9 +115,10 @@
                             </div>
                             <!-- /filter_type -->
                             <div class="buttons">
-                                <a href="#0" class="btn_1" onclick="filter()">Filter</a>
-                                <button type="button" onclick="filter()">Save</button>
-                                <a href="#0" class="btn_1 gray">Reset</a>
+                                {{-- <a href="#0" class="btn_1" onclick="filter()">Filter</a> --}}
+                                <button type="button" class="btn_1" onclick="filter()">{{ __('links.filter') }}</button>
+                                <button type="reset" class="btn_1 gray" >{{ __('links.reset') }}</button>
+
                             </div>
                         </form>
                     </div>

@@ -300,3 +300,7 @@
         <!-- /main -->
 
     @endsection
+    @section('scripts')
+    <script src="{{ asset('comassets/js/carousel-home.min.js')}}"></script>
+    @endsection
+
