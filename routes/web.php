@@ -19,15 +19,17 @@ Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');
     return "Cache is cleared";
 });
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes(['register' => false]);
 
+Route::group(['middleware' => ['is_admin']], function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('roles', 'App\Http\Controllers\RoleController');
 Route::resource('users', 'App\Http\Controllers\UserController');
 Route::resource('size', 'App\Http\Controllers\SizeController');
 Route::resource('color', 'App\Http\Controllers\ColorController');
+Route::resource('city', 'App\Http\Controllers\CityController');
 Route::resource('product', 'App\Http\Controllers\ProductController');
 Route::resource('category', 'App\Http\Controllers\CategoryController');
 //category
@@ -65,9 +67,10 @@ Route::resource('attachment-category', 'App\Http\Controllers\AttachmentCategoryC
  Route::get('getNewsLetters','App\Http\Controllers\CompanyController@getNewsLetters')->name('getNewsLetters');
  Route::get('admin-contact-form', 'App\Http\Controllers\CompanyController@contactForm')->name('admin-contact-form');
 
-
+ Route::resource('promo', 'App\Http\Controllers\PromoController');
 Route::get('facebook', function () {
     return view('facebook');
 });
 Route::get('auth/facebook', 'App\Http\Controllers\Auth\FacebookController@redirectToFacebook');
 Route::get('auth/facebook/callback', 'App\Http\Controllers\Auth\FacebookController@handleFacebookCallback');
+});

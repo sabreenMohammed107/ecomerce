@@ -64,7 +64,7 @@
                                                     <div class="card card-primary">
                                                         <!-- form start -->
                                                         <form role="form" action="{{route('product.store')}}"
-                                                            method="post">
+                                                            method="post" enctype="multipart/form-data">
                                                             @csrf
                                                             <div class="box-body">
                                                                 <div class="col-sm-12">
@@ -128,6 +128,22 @@
                                                                                 <option value="{{$type->id}}">{{$type->ar_name}}</option>
                                                                                 @endforeach
                                                                               </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="">اضافة  صورة</label>
+                                                                            {{-- <div class="custom-file">
+                                                                                <input type="file" class="custom-file-input" name="name" id="customFile">
+                                                                                <label class="custom-file-label" for="customFile">إختار ملف</label>
+                                                                            </div> --}}
+                                                                            <input type="file" name="img" class="custom-file-input"
+                                                                            id="inputGroupFile02" />
+
+                                                                            {{-- <div class="custom-file">
+                                                                                <input type="file" name="img" class="custom-file-input" id="inputGroupFile02"/>
+                                                                                <label class="custom-file-label" for="inputGroupFile02">إختار ملف</label>
+                                                                            </div> --}}
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">

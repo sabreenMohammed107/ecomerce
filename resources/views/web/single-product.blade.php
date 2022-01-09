@@ -46,7 +46,11 @@
                 </div>
                 <!-- /page_header -->
                 <div class="prod_info">
-                    <h1>@if (LaravelLocalization::getCurrentLocale() === 'en')
+                    <form action="{{ LaravelLocalization::localizeUrl('/add-to-my-cart') }}" method="post">
+                        @csrf
+                  <input type="hidden" name="product_id" value="{{$row->id}}" >
+                  <input type="hidden" name="user_id" value="{{Auth::user()->id}}" >
+                        <h1>@if (LaravelLocalization::getCurrentLocale() === 'en')
                         {{ $row->en_name }}
                     @else
                         {{ $row->ar_name }}
@@ -72,21 +76,26 @@
                         <div class="row">
                             <label class="col-xl-5 col-lg-5  col-md-6 col-6 pt-0"><strong>{{ __('links.color') }}</strong></label>
                             <div class="col-xl-4 col-lg-5 col-md-6 col-6 colors">
-                                <ul>
+                                 <ul>
                                     @foreach($row->color as $key => $color)
 
-                                    <li><a href="#0" class="color  {{ $key == 0 ? 'active' : '' }}" style="background-color: {{$color->colorid}}"></a></li>
+                                    <li ><a href="#0" data-category="{{$color->id }}" class="search_category color  {{ $key == 0 ? 'active' : '' }}" style="background-color: {{$color->colorid}}">
+
+                                    </a></li>
                                     @endforeach
 
 
                                 </ul>
+
+                                <input type="hidden"  id="category" name="product_color" value="{{$row->color[0]->id}}"  >
                             </div>
-                        </div>
+                            </div>
+
                         <div class="row">
                             <label class="col-xl-5 col-lg-5 col-md-6 col-6"><strong>{{ __('links.size') }}</strong> - {{ __('links.size_guide') }} <a href="#0" data-bs-toggle="modal" data-bs-target="#size-modal"><i class="ti-help-alt"></i></a></label>
                             <div class="col-xl-4 col-lg-5 col-md-6 col-6">
                                 <div class="custom-select-form">
-                                    <select class="wide">
+                                    <select class="wide" name="product_size">
                                         @foreach($row->sizes as $key => $size)
                                         <option value="{{$size->id}}" >{{$size->ar_name}}</option>
                                         @endforeach
@@ -101,7 +110,7 @@
                             <label class="col-xl-5 col-lg-5  col-md-6 col-6"><strong>{{ __('links.quantity') }}</strong></label>
                             <div class="col-xl-4 col-lg-5 col-md-6 col-6">
                                 <div class="numbers-row">
-                                    <input type="text" value="1" id="quantity_1" class="qty2" name="quantity_1">
+                                    <input type="text" value="1" id="quantity_1" class="qty2" name="quantity">
                                 </div>
                             </div>
                         </div>
@@ -114,9 +123,12 @@
                                 @endif</span></div>
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <div class="btn_add_to_cart"><a href="#0" class="btn_1">{{ __('links.add_cart') }}</a></div>
+                            <div class="btn_add_to_cart">
+                                <button class="btn_1" type="submit">{{ __('links.add_cart') }}</button>
+                            </div>
                         </div>
                     </div>
+                </form>
                 </div>
                 <!-- /prod_info -->
                 <div class="product_actions">
@@ -287,5 +299,11 @@
 @section('scripts')
  <!-- SPECIFIC SCRIPTS -->
  <script  src="{{ asset('comassets/js/carousel_with_thumbs.js')}}"></script>
+<script>
+    $(".search_category").click(function(e){
 
+    $("#category").val($(this).attr("data-category"));
+
+});
+</script>
  @endsection

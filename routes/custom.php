@@ -50,6 +50,22 @@ Route::group(
         Route::get('fetch-product-filter','App\Http\Controllers\Web\ProductsController@fetch_data');
         Route::get('/single-product/{id}',[App\Http\Controllers\Web\ProductsController::class, 'singleProduct'])->name('single-product');
 
+        //cart
+        Route::get('/my-cart/{id}', [App\Http\Controllers\Web\CartController::class, 'index']);
+        Route::post('add-to-my-cart', [App\Http\Controllers\Web\CartController::class,'storeCart']);
+        // web-fetchInc
+        Route::get('/web-fetchInc', [App\Http\Controllers\Web\CartController::class,'AddQuantity'])->name('web-fetchInc');
+        Route::get('/web-fetchDec', [App\Http\Controllers\Web\CartController::class,'SubQuantity'])->name('web-fetchDec');
+
+        Route::get('/web-item-del', [App\Http\Controllers\Web\CartController::class,'DelItem'])->name('web-item-del');
+//oder
+Route::get('/place-order/{id}', [App\Http\Controllers\Web\OrderController::class, 'index']);
+
+Route::get('/getDeliverCost', [App\Http\Controllers\Web\OrderController::class, 'delivery'])->name('getDeliverCost');
+Route::get('/getPromoCost', [App\Http\Controllers\Web\OrderController::class, 'promo'])->name('getPromoCost');
+Route::post('saving-order', [App\Http\Controllers\Web\OrderController::class,'storeOrder']);
+
+// Route::get('sub-qty/{id}', 'Api\CartController@SubstractQuantity');
         // Route::get('/confirm',
         // function () {
         //     Session::flash('error', 'test');

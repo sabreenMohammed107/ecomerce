@@ -70,8 +70,51 @@
 
           </ul>
         </li>
-        <li><a href="{{ route('category.index') }}"><i class="fa fa-circle-o text-red"></i> <span>التصنيفات</span></a></li>
-        <li><a href="{{ route('product.index') }}"><i class="fa fa-circle-o text-aqua"></i> <span>الاصناف</span></a></li>
+        <li><a href="{{ route('city.index') }}"><i class="fa fa-circle-o"></i> الدليفرى </a></li>
+
+        <li class="treeview">
+            <a href="{{ route('category.index') }}">
+              <i class="fa fa-edit"></i>
+              <span>التصنيفات</span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a href="{{ route('category.index') }}"><i class="fa fa-circle-o text-red"></i> <span>عرض التصنيفات</span></a>
+                </li>
+                  <li><a href="{{ route('category.create') }}"><i class="fa fa-circle-o"></i> اضافه تصنيف</a></li>
+
+            </ul>
+          </li>
+          <li class="treeview">
+            <a href="{{ route('category.index') }}">
+              <i class="fa fa-edit"></i>
+              <span>المنتجات</span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a href="{{ route('product.index') }}"><i class="fa fa-circle-o text-red"></i> <span>عرض المنتجات</span></a>
+                </li>
+                  <li><a href="{{ route('product.create') }}"><i class="fa fa-circle-o"></i> اضافه منتج</a></li>
+
+            </ul>
+          </li>
+
+          <li class="treeview">
+            <a href="{{ route('category.index') }}">
+              <i class="fa fa-edit"></i>
+              <span>الكوبونات</span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a href="{{ route('promo.index') }}"><i class="fa fa-circle-o text-red"></i> <span>عرض الكوبونات</span></a>
+                </li>
+                  <li><a href="{{ route('promo.create') }}"><i class="fa fa-circle-o"></i> اضافه كوبون</a></li>
+
+            </ul>
+          </li>
 
         <li class="treeview">
           <a href="{{ route('category.index') }}">

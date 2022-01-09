@@ -32,9 +32,9 @@
                                             </p>
                                             <div class="owl-slide-animated owl-slide-cta">
                                                 <a class="btn_1" @if ($slide->category_id)
-                                                    href="#category"
+                                                    href="{{ LaravelLocalization::localizeUrl('/products/' . $slide->category_id) }}"
                                                 @else
-                                                    href="#product"
+                                                    href="{{ LaravelLocalization::localizeUrl('/single-product/'.$slide->product_id) }}"
                 @endif
                 role="button">
                 {{ __('links.shop_now') }}</a>

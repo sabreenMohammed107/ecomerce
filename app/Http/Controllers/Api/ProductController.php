@@ -16,6 +16,11 @@ use Illuminate\Http\Request;
 
 class ProductController extends BaseController
 {
+    public function allProduct(){
+        $products = Product::get();
+
+        return $this->sendResponse(ProductResource::collection($products), 'All products Retrieved  Successfully');
+    }
     public function index($id){
         $products = Product::where('category_id',$id)->get();
 
@@ -50,9 +55,9 @@ public function subCategories($id){
 }
 
 //SEARCH
-public function search(Request $request){
-    if($request->get('search-name')) {
-        $search = $request->get('search-name');
+public function search($str){
+    if($str) {
+        $search = $str;
 
         $products=Product::where('ar_name','LIKE',"%$search%")->orWhere('en_name','LIKE',"%$search%")
         ->orwhereHas('category', function ($query) use ($search){

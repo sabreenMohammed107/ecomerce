@@ -42,4 +42,11 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     @yield('style')
+    <style>
+         .bootstrap-table .table:not(.table-condensed) > tbody > tr > td{
+             /* text-indent: 10px; */
+             padding-right: 10px !important;
+
+         }
+    </style>
 </head>

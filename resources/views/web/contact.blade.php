@@ -51,19 +51,7 @@
     @if(Session::has('flash_success'))
 
     <div class="alert alert-success alert-dismissible fade show" role="alert"
-    @if(LaravelLocalization::getCurrentLocale() === "ar")
-    style="text-align: right"
-        @endif >
-        <strong ><i class="fa fa-check-circle"></i> {{session('flash_success') }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-@endif
-@if(Session::has('flash_danger'))
 
-<div class="alert alert-danger alert-dismissible fade show" role="alert"
-@if(LaravelLocalization::getCurrentLocale() === "ar")
-style="text-align: right"
-    @endif >
     <strong ><i class="fa fa-check-circle"></i> {{session('flash_danger')}}</strong>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>

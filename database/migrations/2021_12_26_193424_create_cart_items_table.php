@@ -16,7 +16,10 @@ class CreateCartItemsTable extends Migration
         Schema::create('cart_items', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('cart_id')->unsigned()->nullable();
-            $table->bigInteger('product_id')->unsigned()->nullable();
+           $table->bigInteger('product_id')->unsigned()->nullable();
+            $table->bigInteger('product_size')->unsigned()->nullable();
+            $table->bigInteger('product_color')->unsigned()->nullable();
+            $table->integer('quantity')->nullable();
           $table->float('price',8,2)->nullable();
             $table->timestamps();
         });

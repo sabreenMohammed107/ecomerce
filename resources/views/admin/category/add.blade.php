@@ -45,7 +45,7 @@
                                                     <div class="card card-primary">
                                                         <!-- form start -->
                                                         <form role="form" action="{{route('category.store')}}"
-                                                            method="post">
+                                                            method="post" enctype="multipart/form-data">
                                                             @csrf
                                                             <div class="card-body">
                                                                 <div class="row">
@@ -67,13 +67,13 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                    <div class="col-xs-6 col-sm-6 col-md-6">
                                                                         <div class="form-group">
                                                                             <label for="">الوصف عربى</label>
                                                                             <textarea class="form-control summernote" name="ar_description">{{ old('ar_description') }}</textarea>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                    <div class="col-xs-6 col-sm-6 col-md-6">
                                                                         <div class="form-group">
                                                                             <label for="">الوصف انجليزى</label>
                                                                             <textarea class="form-control summernote" name="en_description">{{ old('en_description') }}</textarea>
@@ -90,7 +90,22 @@
                                                                                 id="">
                                                                         </div>
                                                                     </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="">اضافة  صورة</label>
+                                                                            {{-- <div class="custom-file">
+                                                                                <input type="file" class="custom-file-input" name="name" id="customFile">
+                                                                                <label class="custom-file-label" for="customFile">إختار ملف</label>
+                                                                            </div> --}}
+                                                                            <input type="file" name="img" class="custom-file-input"
+                                                                            id="inputGroupFile02" />
 
+                                                                            {{-- <div class="custom-file">
+                                                                                <input type="file" name="img" class="custom-file-input" id="inputGroupFile02"/>
+                                                                                <label class="custom-file-label" for="inputGroupFile02">إختار ملف</label>
+                                                                            </div> --}}
+                                                                        </div>
+                                                                    </div>
 
                                                                     </div>
                                                                 </div>

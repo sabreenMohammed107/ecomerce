@@ -64,7 +64,7 @@
                                                     <div class="card card-primary">
                                                         <!-- form start -->
                                                         <form role="form" action="{{ route('product.update',$product->id) }}"
-                                                            method="post">
+                                                            method="post" enctype="multipart/form-data">
                                                             @method('PUT')
                                                             @csrf
                                                             <div class="box-body">
@@ -128,6 +128,23 @@
                                                                                 <option value="{{$type->id}}" {{ $product->category_id == $type->id ? 'selected' : '' }}>{{$type->name}}</option>
                                                                                 @endforeach
                                                                               </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label for="">اضافة صورة</label>
+                                                                            {{-- <div class="custom-file">
+                                                                            <input type="file" class="custom-file-input" name="name" id="customFile">
+                                                                            <label class="custom-file-label" for="customFile">إختار ملف</label>
+                                                                        </div> --}}
+
+                                                                            <div class="custom-file">
+                                                                                <input type="file" name="img"
+                                                                                    class="custom-file-input"
+                                                                                    id="inputGroupFile02" />
+                                                                                <label class="custom-file-label"
+                                                                                    for="inputGroupFile02">{{ $product->images[0]->img ?? '' }}</label>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">

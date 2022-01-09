@@ -80,18 +80,18 @@
 	</div>
 </div>
 <!-- Add Model -->
-<div class="modal modal-light" id="addNationalities" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content ">
+<<div class="modal modal-light" id="addNationalities" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content ">
 
-            <div class="modal-body">
+        <div class="modal-body">
 
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <div class="ms-auth-container row no-gutters">
-    <h5 class="modal-title" id="exampleModalLabel"> اضافه جديد</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<div class="ms-auth-container row no-gutters">
+<h5 class="modal-title" id="exampleModalLabel"> اضافه جديد</h5>
 
-              <div class="col-12 p-3">
+          <div class="box-body">
                   <form action="{{route('color.store')}}" method="POST">
                   @csrf
 

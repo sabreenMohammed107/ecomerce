@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Device;
-use App\FCMHelper as FCMHelper;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Resources\CartResource;
 use App\Models\Cart;
@@ -219,13 +218,13 @@ class CartController extends BaseController
                 //     $order->total=$sumPrice* $promo->value;
                 $order->save();
 //save order Items
-$items=[
-    'order_id'=>$order->id,
-    'cart_id'=> $cartData->id,
-    'product_id'=> $cartData->product_id,
-    'price'=>$cartData->price,
-    'quantity'=>$cartData->quantity,
-];
+                $items = [
+                    'order_id' => $order->id,
+                    'cart_id' => $cartData->id,
+                    'product_id' => $cartData->product_id,
+                    'price' => $cartData->price,
+                    'quantity' => $cartData->quantity,
+                ];
                 // }
                 //send notify
                 // $device = Device::where('user_id', $user->id)->where('status', 1)->first();
@@ -368,7 +367,7 @@ $items=[
                 'product_name' => $product->ar_name,
                 'ar_comment' => $request->comment,
             ];
-            $users = User::where('user_type',0)->get();
+            $users = User::where('user_type', 0)->get();
             Notification::send($users, new MyFirstNotification($details));
 
             return $this->sendResponse(null, 'U make review successfully.');

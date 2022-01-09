@@ -21,10 +21,10 @@
                                     <th data-field="id">#</th>
             <th>اسم المستخدم </th>
 
-            <th> اسم المنتج</th>
+            {{-- <th> اسم المنتج</th>
             <th>  المقاس</th>
             <th>  اللون</th>
-            <th>الكمية</th>
+            <th>الكمية</th> --}}
             <th>  الحاله</th>
 
             <th>الإجراءات</th>
@@ -35,11 +35,11 @@
             <tr>
                 <td></td>
                 <td>{{ $index + 1 }}</td>
-                <td>{{ $row->user->username ?? '' }} </td>
-                <td>{{ $row->product->ar_name ?? '' }} </td>
+                 <td>{{ $row->user->username ?? '' }} </td>
+               {{-- <td>{{ $row->product->ar_name ?? '' }} </td>
                 <td>{{ $row->size->size->ar_name ?? '' }} </td>
                 <td>{{ $row->color->color->ar_name ?? '' }} </td>
-                <td>{{ $row->quantity ?? '' }} </td>
+                <td>{{ $row->quantity ?? '' }} </td> --}}
 
                 <td>@if($row->status==1) مؤكده @else غير مؤكده @endif </td>
                 <td>

@@ -17,7 +17,7 @@ class ReviewResource extends JsonResource
     {
         return [
 
-            "rate_no" => $this->rate_no ?? '',
+            "rate_no" =>(integer)$this->rate_no,
             'comment' => $this->ar_comment ?? '',
             "creat_date" => Carbon::parse($this->created_at),
             "user" => new UserResource($this->user),

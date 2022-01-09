@@ -17,7 +17,8 @@ class CreatePromosTable extends Migration
             $table->id();
             $table->string('promo_key')->nullable();
             $table->float('value',8,2)->nullable();
-
+            $table->bigInteger('product_id')->unsigned()->nullable();
+            $table->bigInteger('category_id')->unsigned()->nullable();
             $table->integer('status')->default(1);
             $table->dateTime('expired_date',0)->nullable();
             $table->timestamps();

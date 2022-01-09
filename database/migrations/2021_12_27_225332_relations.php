@@ -49,16 +49,19 @@ class Relations extends Migration
 
  //  This is Realations for the carts Table ..
  Schema::table('carts', function (Blueprint $table) {
-    $table->foreign('product_id')->references('id')->on('products');
-    $table->foreign('product_size')->references('id')->on('product_sizes');
-    $table->foreign('product_color')->references('id')->on('product_colors');
+    // $table->foreign('product_id')->references('id')->on('products');
+    // $table->foreign('product_size')->references('id')->on('product_sizes');
+    // $table->foreign('product_color')->references('id')->on('product_colors');
     $table->foreign('user_id')->references('id')->on('users');
 });
 
 //  This is Realations for the carts Table ..
 Schema::table('cart_items', function (Blueprint $table) {
     $table->foreign('cart_id')->references('id')->on('carts');
-    $table->foreign('product_id')->references('id')->on('products');
+
+ $table->foreign('product_id')->references('id')->on('products');
+    $table->foreign('product_size')->references('id')->on('product_sizes');
+    $table->foreign('product_color')->references('id')->on('product_colors');
 });
 
 
@@ -82,7 +85,12 @@ Schema::table('home_sliders', function (Blueprint $table) {
     $table->foreign('product_id')->references('id')->on('products');
 
 });
+Schema::table('promos', function (Blueprint $table) {
+    $table->foreign('category_id')->references('id')->on('categories');
 
+    $table->foreign('product_id')->references('id')->on('products');
+
+});
     }
 
     /**

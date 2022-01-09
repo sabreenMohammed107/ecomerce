@@ -117,7 +117,9 @@ Please contact us for any complaints and inquiries.',
 'leave_review'=>'Leave a review',
 
 
-
+'sizes'=>'Sizes',
+'colors'=> 'Colors',
+'price'=>'Price',
 
 
 

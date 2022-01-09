@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->integer('payway')->nullable();
             $table->integer('payment_id')->nullable();
             $table->dateTime('order_date',0)->nullable();
-            $table->integer('copoun')->nullable();
+            $table->string('copoun')->nullable();
             $table->float('subtotally',8,2)->nullable();
             $table->float('tax',8,2)->nullable();
             $table->float('delivery_cost',8,2)->nullable();

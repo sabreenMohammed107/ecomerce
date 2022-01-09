@@ -13,6 +13,8 @@ use App\Models\Product_size;
 use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
+
 class ProductController extends Controller
 {
      // This is for General Class Variables.
@@ -79,16 +81,23 @@ class ProductController extends Controller
             'en_name' => 'required',
         'price' => 'required',
 
+        'img'=>'required',
+
 
     ], [
 
         'ar_name.required' => 'حقل الاسم مطلوب',
         'en_name.required' => 'حقل الاسم مطلوب',
         'price.required' => 'حقل السعر مطلوب',
+        'img.required' => 'حقل الصورة مطلوب',
+
 
     ]);
+    DB::beginTransaction();
     try
     {
+        // Disable foreign key checks!
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $values = array_except($request->all(), ['_token', 'price_after_discount', 'status']);
 
         $values['price_after_discount'] = $values['price'] - $values['discount'];
@@ -98,9 +107,21 @@ class ProductController extends Controller
             $values['status'] = 0;
         }
 
-       $product= $this->object::create($values);
+       $product= $this->object::create($values); if ($request->hasFile('img')) {
+        $attach_image = $request->file('img');
+
+        $data['img'] = $this->UplaodImage($attach_image);
+
+    }
+    // dd($request->get('regulation_end_date'));
+    $image = Image::create($data);
+      $product->images()->save($image);
+      DB::commit();
+      // Enable foreign key checks!
+      DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         return redirect()->route($this->routeName . 'edit', $product->id)->with('flash_success','تم الحفظ بنجاح');
     } catch (\Throwable $e) {
+        DB::rollback();
 
         return redirect()->back()->withInput()->with('flash_danger', $e->getMessage());
     }
@@ -162,8 +183,12 @@ class ProductController extends Controller
         'price.required' => 'حقل السعر مطلوب',
 
     ]);
-    try
-    {
+    DB::beginTransaction();
+        try
+        {
+            // Disable foreign key checks!
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
         $values = array_except($request->all(), ['_token', 'price_after_discount', 'status']);
 
         $values['price_after_discount'] = $values['price'] - $values['discount'];
@@ -174,8 +199,22 @@ class ProductController extends Controller
         }
 
         $this->object::findOrFail($id)->update($values);
+        $product=Product::findOrFail($id);
+        if ($request->hasFile('img')) {
+            $attach_image = $request->file('img');
+
+            $data['img'] = $this->UplaodImage($attach_image);
+
+        }
+        // dd($request->get('regulation_end_date'));
+        $image = Image::create($data);
+          $product->images()->sync($image);
+          DB::commit();
+          // Enable foreign key checks!
+          DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         return redirect()->route($this->routeName . 'edit', $id)->with('flash_success','تم الحفظ بنجاح');
     } catch (\Throwable $e) {
+        DB::rollback();
 
         return redirect()->back()->withInput()->with('flash_danger', $e->getMessage());
     }
@@ -203,5 +242,26 @@ class ProductController extends Controller
             }
                 return redirect()->route($this->routeName.'index')->with('flash_success', ' تم الحذف بنجاح!');
 
+    }
+
+      /* uplaud image
+     */
+    public function UplaodImage($file_request)
+    {
+        //  This is Image Info..
+        $file = $file_request;
+        $name = $file->getClientOriginalName();
+        $ext = $file->getClientOriginalExtension();
+        $size = $file->getSize();
+        $path = $file->getRealPath();
+        $mime = $file->getMimeType();
+        // Rename The Image ..
+        $imageName = $name;
+        $uploadPath = public_path('uploads/attachment');
+
+        // Move The image..
+        $file->move($uploadPath, $imageName);
+
+        return $imageName;
     }
 }
