@@ -39,7 +39,7 @@
                     <h2>{{ __('links.email') }}</h2>
                      <a>{{$contact->email}}</a>
                      {{-- <div class="cleaner"></div>
-                      <a>order@allaia.com</a> --}}
+                      <a>order@KAPOTCHA.com</a> --}}
 
                 </div>
             </div>

@@ -14,7 +14,7 @@
             <ul>
                 <li><a href="{{ LaravelLocalization::localizeUrl('/') }}">{{ __('links.home') }}</a></li>
 
-                <li>Cart</li>
+                <li>Favorite</li>
             </ul>
         </div>
         <h1>{{$user->username}}</h1>
@@ -29,7 +29,7 @@
 
 @endif
     <div id="txbody">
-@include('web.cartTable')
+@include('web.favTable')
     </div>
 
 
@@ -45,75 +45,16 @@
 
         var index = $(this).closest('tr').attr('data-id');
 
-var card = $("#cart_id" + index + "").val();
-
+var fav = $("#fav_id" + index + "").val();
+var user = $("#user_id" + index + "").val();
         $.ajax({
                 type: 'GET',
 
-                url: "{{route('web-item-del')}}",
+                url: "{{route('web-item-del-fav')}}",
                 data: {
 
-                    cart: card,
-
-
-
-                },
-                success: function(response) {
-
-                    $('#txbody').html(response);
-
-                },
-                error: function(response) {
-
-
-                }
-            });
-    });
-//add qty
-    $(document).on('click', '.inc', function(e) {
-        e.preventDefault();
-
-        var index = $(this).closest('tr').attr('data-id');
-
-         var card = $("#cart_id" + index + "").val();
-
-        $.ajax({
-                type: 'GET',
-
-                url: "{{route('web-fetchInc')}}",
-                data: {
-
-                    cart: card,
-
-
-
-                },
-                success: function(response) {
-
-                    $('#txbody').html(response);
-
-                },
-                error: function(response) {
-
-
-                }
-            });
-    });
-    //sub qty
-    $(document).on('click', '.dec', function(e) {
-        e.preventDefault();
-        var index = $(this).closest('tr').attr('data-id');
-
-         var card = $("#cart_id" + index + "").val();
-
-        $.ajax({
-                type: 'GET',
-
-                url: "{{route('web-fetchDec')}}",
-                data: {
-
-                    cart: card,
-
+                    fav: fav,
+                    user:user,
 
 
                 },

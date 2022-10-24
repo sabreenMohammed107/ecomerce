@@ -114,16 +114,16 @@
 
                         <div class="grid_item">
                             <figure>
-                                <a href="product-detail-1.html">
+                                <a href="{{ LaravelLocalization::localizeUrl('/single-product/'.$latest->id) }}">
 
-<a href="#"> <img src="{{ asset('uploads/attachment') }}/{{$latest->images['img']}}"
+<a href="{{ LaravelLocalization::localizeUrl('/single-product/'.$latest->id) }}"> <img src="{{ asset('uploads/attachment') }}/{{$latest->images['img']}}"
         class="img-fluid lazy"  data-src="{{ asset('uploads/attachment') }}/{{$latest->images['img']}}" alt="{{ asset('uploads/attachment') }}/{{$latest->images['img']}}"/></a>
         <img class="img-fluid lazy" src="{{ asset('webassetsimg/products/product_placeholder_square_medium.jpg')}}"
         data-src="{{ asset('webassetsimg/products/shoes/1_b.jpg')}}" alt="">
-                                    {{-- <img class="img-fluid lazy" src="img/products/product_placeholder_square_medium.jpg"
-                                        data-src="img/products/shoes/1.jpg" alt="">
-                                    <img class="img-fluid lazy" src="img/products/product_placeholder_square_medium.jpg"
-                                        data-src="img/products/shoes/1_b.jpg" alt=""> --}}
+
+
+
+
                                 </a>
 
                             </figure>
@@ -138,7 +138,7 @@
                 @endforeach
 
                             </div>
-                            <a href="product-detail-1.html">
+                            <a href="{{ LaravelLocalization::localizeUrl('/single-product/'.$latest->id) }}">
                                 <h3>@if (LaravelLocalization::getCurrentLocale() === 'en')
                                     {{ $latest->en_name }}
                                 @else
@@ -152,15 +152,40 @@
                                 @endif</span>
                             </div>
                             <ul>
-                                <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
-                                        title="{{ __('links.add_favorites') }}"><i class="ti-heart"></i><span>{{ __('links.add_favorites') }}</span></a>
-                                </li>
+                                <li>
+
+                                        <form id="myfavForm" action="{{ LaravelLocalization::localizeUrl('/add-to-fav') }}" method="post">
+
+                                            @csrf
+                                            <input type="hidden" name="fav_id" value="{{$latest->id}}" >
+                                            <input type="hidden" name="client_id" value="{{ Auth::user()->id }}">
+
+
+                                            <a
+                                            onclick="this.closest('form').submit();return false;"  class="tooltip-1" data-bs-toggle="tooltip"
+                                                data-bs-placement="left"  title="{{ __('links.add_favorites') }}{{$latest->id}}"><i class="ti-heart"></i><span>{{$latest->id}}{{ __('links.add_favorites') }}</span></a>
+
+                                    </form>
+                                    </li>
                                 <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
                                         title="{{ __('links.share_product') }}"><i class="ti-control-shuffle"></i><span>{{ __('links.share_product') }}</span></a>
                                 </li>
-                                <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
-                                        title="{{ __('links.add_cart') }}"><i class="ti-shopping-cart"></i><span>{{ __('links.add_cart') }}</span></a></li>
-                            </ul>
+                                @if(Auth::user())
+                                <li>
+                                    <form id="mycardForm" action="{{ LaravelLocalization::localizeUrl('/add-to-my-cart') }}" method="post">
+
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $latest->id }}">
+                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                        <a
+                                            onclick="document.getElementById('mycardForm').submit();" class="tooltip-1" data-bs-toggle="tooltip"
+                                            data-bs-placement="left" title="{{ __('links.add_cart') }}"><i
+                                                class="ti-shopping-cart"></i><span></span></a>
+
+                                </form>
+                                    </li>
+                            @endif
+                                    </ul>
                         </div>
                         <!-- /grid_item -->
                     </div>
@@ -171,20 +196,17 @@
             </div>
             <!-- /container -->
 
-            <div class="featured lazy" data-bg="url(img/featured_home.jpg)">
-                <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+
+            <div class="featured lazy" data-bg="url({{asset('comassets/img/featured_home.jpg')}});" data-was-processed="true" style="background-image: url({{asset('comassets/img/featured_home.jpg')}});"
+            >
+                <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)" style="background-color: rgba(0, 0, 0, 0.5);">
                     <div class="container margin_60">
                         <div class="row justify-content-center justify-content-md-start">
-                            <div class="col-lg-6 wow" data-wow-offset="150">
-                                <h3>Armor<br>Air Color 720</h3>
-                                <p>Lightweight cushioning and durable support with a Phylon midsole</p>
-                                <div class="feat_text_block">
-                                    <div class="price_box">
-                                        <span class="new_price">$90.00</span>
-                                        <span class="old_price">$170.00</span>
-                                    </div>
-                                    <a class="btn_1" href="listing-grid-1-full.html" role="button">Shop Now</a>
-                                </div>
+                            <div class="col-lg-12 wow animated" data-wow-offset="150" style="visibility: visible;">
+
+                               <a href="https://apps.apple.com/us/app/shesure/id1612969554"><img class="img-store first-store" src="{{asset('comassets/img/apple-store-logo-png-1-transparent.png')}}"></a>
+                               <a href="https://play.google.com/store/apps/details?id=com.shesure.clothesapp"><img class="img-store" src="{{asset('comassets/img/get-it-on-google-play-badge-png-use-unwanted-payg-sim-credit-to-pay-for-apps-on-google-play-gadgetz-tv-2357.png')}}"></a>
+
                             </div>
                         </div>
                     </div>
@@ -209,13 +231,13 @@
                         <div class="grid_item">
 
                             <figure>
-                                <a href="product-detail-1.html">
-                                    <a href="#"> <img src="{{ asset('uploads/attachment') }}/{{$offer->images['img']}}"
+                                <a href="{{ LaravelLocalization::localizeUrl('/single-product/'.$offer->id) }}">
+                                    <a href="{{ LaravelLocalization::localizeUrl('/single-product/'.$offer->id) }}"> <img src="{{ asset('uploads/attachment') }}/{{$offer->images['img']}}"
                                         class="owl-lazy"  data-src="{{ asset('uploads/attachment') }}/{{$offer->images['img']}}" alt="{{ asset('uploads/attachment') }}/{{$offer->images['img']}}"/></a>
 
 
-                                    <img class="owl-lazy" src="img/products/product_placeholder_square_medium.jpg"
-                                        data-src="img/products/shoes/4.jpg" alt="">
+                                    {{-- <img class="owl-lazy" src="img/products/product_placeholder_square_medium.jpg"
+                                        data-src="img/products/shoes/4.jpg" alt=""> --}}
                                 </a>
                             </figure>
                             <div class="rating"> @foreach (range(1, 5) as $i)
@@ -226,24 +248,44 @@
                                 <i class="icon-star"></i>
                                 @endif
                                 @endforeach </div>
-                            <a href="product-detail-1.html">
+                            <a href="{{ LaravelLocalization::localizeUrl('/single-product/'.$offer->id) }}">
                                 <h3>@if (LaravelLocalization::getCurrentLocale() === 'en')
-                                    {{ $latest->en_name }}
+                                    {{ $offer->en_name }}
                                 @else
-                                    {{ $latest->ar_name }}
+                                    {{ $offer->ar_name }}
                                 @endif</h3>
                             </a>
                             <div class="price_box">
-                                <span class="new_price">{{ $latest->price_after_discount }}</span>
+                                <span class="new_price">{{ $offer->price_after_discount }}</span>
                             </div>
                             <ul>
-                                <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
-                                        title="{{ __('links.add_favorites') }}"><i class="ti-heart"></i><span> {{ __('links.add_favorites') }}</span></a></li>
+                                <li><form id="myfavForm" action="{{ LaravelLocalization::localizeUrl('/add-to-my-fav') }}" method="post">
+
+                                    @csrf
+                                    <input type="hidden" name="fav_id" value="{{ $offer->id }}">
+                                    <input type="hidden" name="client_id" value="{{ Auth::user()->id }}">
+                                    <a
+                                    onclick="this.closest('form').submit();return false;" class="tooltip-1" data-bs-toggle="tooltip"
+                                        data-bs-placement="left"  title="{{ __('links.add_favorites') }}"><i class="ti-heart"></i><span>{{ __('links.add_favorites') }}</span></a>
+
+                            </form>
+                        </li>
                                 <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
                                         title="{{ __('links.share_product') }}"><i class="ti-control-shuffle"></i><span>{{ __('links.share_product') }}</span></a></li>
-                                <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
-                                        title="{{ __('links.add_cart') }}"><i class="ti-shopping-cart"></i><span>{{ __('links.add_cart') }}</span></a></li>
-                            </ul>
+                                        @if(Auth::user())
+                                        <li><form id="mycardForm" action="{{ LaravelLocalization::localizeUrl('/add-to-my-cart') }}" method="post">
+                                            {{-- <form id="mycardForm" action="#" method="post" > --}}
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $offer->id }}">
+                                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                            <a
+                                                onclick="document.getElementById('mycardForm').submit();" class="tooltip-1" data-bs-toggle="tooltip"
+                                                data-bs-placement="left" title="{{ __('links.add_cart') }}"><i
+                                                    class="ti-shopping-cart"></i><span></span></a>
+
+                                    </form></li>
+                           @endif
+                                    </ul>
                         </div>
                         <!-- /grid_item -->
                     </div>
@@ -269,7 +311,7 @@
                         <div class="col-lg-6">
                             <a class="box_news" href="blog.html">
                                 <figure>
-                                    <img src="{{ asset('uploads/blogs') }}/{{$blog->img}}" data-src="{{ asset('uploads/attachment') }}/{{$offer->images['img']}}" alt="" width="400"
+                                    <img src="{{ asset('uploads/blogs') }}/{{$blog->img}}" data-src="{{ asset('uploads/blogs') }}/{{$blog->img}}" alt="" width="400"
                                         height="266" class="lazy">
 
                                 </figure>
@@ -279,10 +321,12 @@
                                 @else
                                     {{ $blog->ar_title }}
                                 @endif</h4>
-                                <p>@if (LaravelLocalization::getCurrentLocale() === 'en')
-                                    {{Illuminate\Support\Str::limit(strip_tags($blog->en_text ?? ''), $limit = 100, $end = '...')}}
-                                @else
-                                {{Illuminate\Support\Str::limit(strip_tags($blog->ar_text ?? ''), $limit = 100, $end = '...')}}
+                                @if (LaravelLocalization::getCurrentLocale() === 'en')
+                                <p style="text-align: left !important">
+                                    {!! Illuminate\Support\Str::limit(strip_tags($blog->en_text ?? ''), $limit = 100, $end = '')!!}
+                                </p>
+                                    @else
+                                <p style="text-align: right !important"> {!! Illuminate\Support\Str::limit(strip_tags($blog->ar_text ?? ''), $limit = 100, $end = '')!!}
                                 @endif</p>
                             </a>
                         </div>

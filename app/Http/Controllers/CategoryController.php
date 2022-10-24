@@ -81,7 +81,7 @@ class CategoryController extends Controller
 
     ]);
 
-        $values = array_except($request->all(), ['_token']);
+        $values = array_except($request->all(), ['_token','img']);
 
 
        $category= $this->object::create($values);
@@ -89,11 +89,12 @@ class CategoryController extends Controller
         $attach_image = $request->file('img');
 
         $data['img'] = $this->UplaodImage($attach_image);
+        // dd($request->get('regulation_end_date'));
+    $image = Image::create($data);
+    $category->images()->save($image);
 
     }
-    // dd($request->get('regulation_end_date'));
-    $image = Image::create($data);
-      $category->images()->save($image);
+
       DB::commit();
       // Enable foreign key checks!
       DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -166,11 +167,11 @@ class CategoryController extends Controller
             $attach_image = $request->file('img');
 
             $data['img'] = $this->UplaodImage($attach_image);
-
+            $image = Image::create($data);
+            $category->images()->sync($image);
         }
         // dd($request->get('regulation_end_date'));
-        $image = Image::create($data);
-          $category->images()->sync($image);
+
           DB::commit();
           // Enable foreign key checks!
           DB::statement('SET FOREIGN_KEY_CHECKS=1;');

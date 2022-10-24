@@ -8,24 +8,20 @@
 
     <main>
         <div class="top_banner">
-            <div class="opacity-mask bg-gemy d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.3)">
+            <div  class="opacity-mask bg-gemy d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.3)">
                 <div class="container">
                     <div class="breadcrumbs">
                         <ul>
                             <li><a href="{{ LaravelLocalization::localizeUrl('/') }}">{{ __('links.home') }}</a></li>
-
-                            <li><a href="{{ LaravelLocalization::localizeUrl('/categories') }}">{{ __('links.categories') }}</a></li>
 
                         </ul>
 
                     </div>
                     <h1>
 
-                        @if (LaravelLocalization::getCurrentLocale() === 'en')
-                        {{ $category->en_name }}
-                    @else
-                        {{ $category->ar_name }}
-                    @endif
+
+                        {{ __('links.searchresult') }}
+
 
 
                     </h1>
@@ -45,7 +41,7 @@
                     <div class="filter_col">
                         <form id="categoryTarget" action="javascript:void(0)" method="get">
                             <input type="hidden" value="{{ csrf_token() }}" id="subCatToken" />
-                            <input type="hidden" value="{{$category->id}}" id="category_id" />
+                            {{-- <input type="hidden" value="{{$category->id}}" id="category_id" /> --}}
                             <div class="inner_bt"><a href="#" class="open_filters"><i class="ti-close"></i></a>
                             </div>
                             <div class="filter_type version_2">
@@ -132,7 +128,7 @@
                 <div class="col-lg-9">
                     <div id="table_data">
 
-                        @include('web.productList')
+                        @include('web.searchList')
 
 
 
@@ -168,15 +164,15 @@
             $("input:checkbox[name=priceId]:checked").each(function() {
                 billprices.push($(this).val());
             });
-            var category = $("#category_id").val();
+
 
             $.ajax({
                 type: 'GET',
 
-                url: "{{route('web-fetchProduct')}}",
+                url: "{{route('web-fetchProductSearch')}}",
                 data: {
 
-                    category: category,
+
                     sizes: billSizes,
                     colors: billColors,
                     prices: billprices,
@@ -215,8 +211,8 @@ $(document).on('click', '#productt .pagination a', function(event) {
                 $("input:checkbox[name=priceId]:checked").each(function() {
                     billprices.push($(this).val());
                 });
-                var category = $("#category_id").val();
-                fetch_productdata(page, billColors, billSizes, billprices, category);
+
+                fetch_productdata(page, billColors, billSizes, billprices);
 
             });
         });
@@ -226,10 +222,10 @@ $(document).on('click', '#productt .pagination a', function(event) {
             function fetch_productdata(page, billColors, billSizes, billprices, category) {
                 // alert(category)
                 $.ajax({
-                    url: "/fetch-product-filter?page=" + page,
+                    url: "/fetch-product-filter-search?page=" + page,
                     data: {
 
-                        category: category,
+
                         sizes: billSizes,
                         colors: billColors,
                         prices: billprices,

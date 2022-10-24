@@ -121,7 +121,7 @@ Please contact us for any complaints and inquiries.',
 'colors'=> 'Colors',
 'price'=>'Price',
 
-
+'searchresult'=>'Search Result',
 
 
 

@@ -132,10 +132,10 @@
 
                                 </ul>
 
-                                <div class="total clearfix">TOTAL <span id="totalAfterDel">{{ $totalAfterDel }}</span>
+                                {{-- <div class="total clearfix">TOTAL <span id="totalAfterDel">{{ $totalAfterDel }}</span>
                                 </div>
-                                <input type="hidden" id="Total" name="subtotally" value="{{ $totalAfterDel }}">
-                                <div class="col-sm-8">
+                                <input type="hidden" id="Total" name="subtotally" value="{{ $totalAfterDel }}"> --}}
+                                {{-- <div class="col-sm-8">
                                     <div class="apply-coupon">
                                         <div class="form-group">
                                             <div class="row g-2">
@@ -147,7 +147,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <input type="hidden" id="coponAdd" name="promo" value="">
                                 <div class="total clearfix">TOTAL Final<span
                                         id="totalAfterPromo">{{ $totalAfterDel }}</span></div>

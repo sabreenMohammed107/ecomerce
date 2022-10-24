@@ -109,7 +109,7 @@
             <div class="col-lg-6">
                 <ul class="additional_links">
 
-                    <li><span>© 2022 Fekra</span></li>
+                    <li><span>© 2022 KAPOTCHA</span></li>
                 </ul>
             </div>
         </div>
