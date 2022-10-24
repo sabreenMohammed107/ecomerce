@@ -39,10 +39,10 @@
                             </li>
 
 
-                            <li>
+                            {{-- <li>
                                 <a href="#" class="show-submenu">{{ __('links.offers') }}</a>
 
-                            </li>
+                            </li> --}}
 
 
 
