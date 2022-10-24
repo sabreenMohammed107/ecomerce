@@ -153,20 +153,24 @@
                             </div>
                             <ul>
                                 <li>
+                                    @if(Auth::user())
+                                    <form id="myfavForm" action="{{ LaravelLocalization::localizeUrl('/add-to-my-fav') }}" method="post">
 
-                                        <form id="myfavForm" action="{{ LaravelLocalization::localizeUrl('/add-to-fav') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="fav_id" value="{{ $offer->id }}">
+                                    <input type="hidden" name="client_id" value="{{ Auth::user()->id }}">
+                                    <a
+                                    onclick="this.closest('form').submit();return false;" class="tooltip-1" data-bs-toggle="tooltip"
+                                        data-bs-placement="left"  title="{{ __('links.add_favorites') }}"><i class="ti-heart"></i><span>{{ __('links.add_favorites') }}</span></a>
 
-                                            @csrf
-                                            <input type="hidden" name="fav_id" value="{{$latest->id}}" >
-                                            <input type="hidden" name="client_id" value="{{ Auth::user()->id }}">
+                            </form>
+                            @else
 
-
-                                            <a
-                                            onclick="this.closest('form').submit();return false;"  class="tooltip-1" data-bs-toggle="tooltip"
-                                                data-bs-placement="left"  title="{{ __('links.add_favorites') }}{{$latest->id}}"><i class="ti-heart"></i><span>{{$latest->id}}{{ __('links.add_favorites') }}</span></a>
-
-                                    </form>
-                                    </li>
+                            <a
+                             class="tooltip-1" data-bs-toggle="tooltip"  href="{{ route('user-login') }}"
+                                data-bs-placement="left"  title="{{ __('links.add_favorites') }}"><i class="ti-heart"></i><span>{{ __('links.add_favorites') }}</span></a>
+                            @endif
+                        </li>
                                 <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
                                         title="{{ __('links.share_product') }}"><i class="ti-control-shuffle"></i><span>{{ __('links.share_product') }}</span></a>
                                 </li>
@@ -259,7 +263,9 @@
                                 <span class="new_price">{{ $offer->price_after_discount }}</span>
                             </div>
                             <ul>
-                                <li><form id="myfavForm" action="{{ LaravelLocalization::localizeUrl('/add-to-my-fav') }}" method="post">
+                                <li>
+                                    @if(Auth::user())
+                                    <form id="myfavForm" action="{{ LaravelLocalization::localizeUrl('/add-to-my-fav') }}" method="post">
 
                                     @csrf
                                     <input type="hidden" name="fav_id" value="{{ $offer->id }}">
@@ -269,6 +275,12 @@
                                         data-bs-placement="left"  title="{{ __('links.add_favorites') }}"><i class="ti-heart"></i><span>{{ __('links.add_favorites') }}</span></a>
 
                             </form>
+                            @else
+
+                            <a
+                             class="tooltip-1" data-bs-toggle="tooltip"  href="{{ route('user-login') }}"
+                                data-bs-placement="left"  title="{{ __('links.add_favorites') }}"><i class="ti-heart"></i><span>{{ __('links.add_favorites') }}</span></a>
+                            @endif
                         </li>
                                 <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
                                         title="{{ __('links.share_product') }}"><i class="ti-control-shuffle"></i><span>{{ __('links.share_product') }}</span></a></li>
