@@ -121,9 +121,9 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ route('clients.index') }}"><i class="fa fa-circle-o"></i> سجل العملاء</a></li>
-            <li><a href="{{ route('admin-cart.index') }}"><i class="fa fa-circle-o"></i> الكارت</a></li>
+            {{-- <li><a href="{{ route('admin-cart.index') }}"><i class="fa fa-circle-o"></i> الكارت</a></li> --}}
             <li><a href="{{ route('admin-order.index') }}"><i class="fa fa-circle-o"></i> الاوردر</a></li>
-            <li><a href="sliders.html"><i class="fa fa-circle-o"></i> المفضلة</a></li>
+            {{-- <li><a href="sliders.html"><i class="fa fa-circle-o"></i> المفضلة</a></li> --}}
 
           </ul>
         </li>
