@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Lang as Lang;
 class CartController extends Controller
 {
     protected $viewName = 'web.';
+
     public function index($id)
     {
         $user = User::find($id);
@@ -22,13 +23,15 @@ class CartController extends Controller
 
         return view($this->viewName . 'cart', compact('user', 'cart'));
     }
-public function fav($id){
 
-    $user = User::find($id);
-    $favs = Favorites_product::where('client_id', $id)->get();
+    public function fav($id)
+    {
 
-    return view($this->viewName . 'fav', compact('user', 'favs'));
-}
+        $user = User::find($id);
+        $favs = Favorites_product::where('client_id', $id)->get();
+
+        return view($this->viewName . 'fav', compact('user', 'favs'));
+    }
     public function storeCart(Request $request)
     {
 
@@ -38,11 +41,11 @@ public function fav($id){
                 $query->where('status', "=", 0);
             })
             ->first();
-        if ($exist) {
-            \Session::flash('flash_success', Lang::get('هذا المنتج موجود بالفعل'));
-            return view($this->viewName . 'cart');
+        // if ($exist) {
+        //     \Session::flash('flash_success', Lang::get('هذا المنتج موجود بالفعل'));
+        //     return view($this->viewName . 'cart');
 
-        }
+        // }
 
         DB::beginTransaction();
         try
@@ -162,7 +165,6 @@ public function fav($id){
     public function DelItemFav(Request $request)
     {
         $fav = Favorites_product::where('id', $request->get('fav'))->first();
-
 
         $fav->delete();
         $favs = Favorites_product::where('client_id', $request->get('user'))->get();
