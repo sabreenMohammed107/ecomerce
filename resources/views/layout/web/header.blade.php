@@ -5,7 +5,7 @@
             <div class="row small-gutters">
                 <div class="col-xl-3 col-lg-3 d-lg-flex align-items-center">
                     <div id="logo">
-                        <a href="#"><img src="{{ asset('webassets/img/kapotcha logo.JPG') }}" alt=""
+                        <a href="{{ LaravelLocalization::localizeUrl('/') }}" ><img src="{{ asset('webassets/img/kapotcha logo.JPG') }}" alt=""
                                 width="100" height="35"></a>
                     </div>
                 </div>
@@ -20,9 +20,9 @@
                     <!-- Mobile menu button -->
                     <div class="main-menu">
                         <div id="header_menu">
-                            <a href="#"><img src="{{ asset('webassets/img/kapotcha logo.JPG') }}" alt=""
+                            <a href="{{ LaravelLocalization::localizeUrl('/') }}" ><img src="{{ asset('webassets/img/kapotcha logo.JPG') }}" alt=""
                                     width="80" height="35"></a>
-                            <a href="#" class="open_close" id="close_in"><i class="ti-close"></i></a>
+                            <a href="{{ LaravelLocalization::localizeUrl('/') }}" class="open_close" id="close_in"><i class="ti-close"></i></a>
                         </div>
                         <ul>
                             <li>

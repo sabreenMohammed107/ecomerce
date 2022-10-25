@@ -18,6 +18,7 @@
 
             <tr data-id="{{$index+1}}">
                 <td>
+                    <a href="{{ LaravelLocalization::localizeUrl('/single-product/' . $fav->product->id) }}">
                     <div class="thumb_cart">
                         <img src="{{ asset('uploads/attachment') }}/{{$fav->product->images[0]->img ?? ''}}" data-src="{{ asset('uploads/attachment') }}/{{$item->product->images[0]->img ?? ''}}"  alt="Image">
                     </div>
@@ -26,6 +27,7 @@
                     @else
                         {{ $fav->product->ar_name ??'' }}
                     @endif</span>
+                </a>
                 </td>
                 <input type="hidden" id="fav_id{{$index+1}}" value="{{$fav->id}}" >
                 <input type="hidden" id="user_id{{$index+1}}" value="{{$fav->client_id}}" >
