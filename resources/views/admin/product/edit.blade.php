@@ -1,5 +1,5 @@
 @extends('layout.web')
-@section('title', 'إدارة المهام')
+@section('title', ' الاصناف')
 
 @section('content')
 <div class="row">
