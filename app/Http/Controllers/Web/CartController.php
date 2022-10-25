@@ -72,13 +72,17 @@ public function fav($id){
                 $cartItem = Cart_item::create($data);
                 array_push($ItemsArray, $cart->product);
             } else {
-                $data = [
-                    'user_id' => $user->id,
-
+                $data2 = [
+                    'user_id' => $request->user_id,
+                    'product_id' => $request->product_id,
+                    'price' => $request->quantity * $product->price,
+                    'quantity' => $request->quantity,
+                    'product_size' => $request->product_size ?? null,
+                    'product_color' => $request->product_color ?? null,
                     'status' => 0,
                 ];
 
-                $cartData = Cart::create($data);
+                $cartData = Cart::create($data2);
 
                 //items
                 if ($cartData) {
