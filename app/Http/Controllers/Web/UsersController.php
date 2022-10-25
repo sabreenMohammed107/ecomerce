@@ -85,10 +85,11 @@ class UsersController extends Controller
             'username' => $input['username'],
             'email' => $input['email'],
             'phone' => $input['phone'],
+            'user_type'=>1,
 
             'password' => Hash::make($input['password']),
         ]);
-        $user->assignRole(0);
+        // $user->assignRole(1);
 
 
         if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
