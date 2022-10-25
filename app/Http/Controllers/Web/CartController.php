@@ -77,7 +77,11 @@ class CartController extends Controller
             } else {
                 $data = [
                     'user_id' => $user->id,
-
+                    'product_id' => $request->product_id,
+                    'price' => $request->quantity * $product->price,
+                    'quantity' => $request->quantity,
+                    'product_size' => $request->product_size ?? null,
+                    'product_color' => $request->product_color ?? null,
                     'status' => 0,
                 ];
 
@@ -91,13 +95,19 @@ class CartController extends Controller
                     $data = [
                         'cart_id' => $cartData->id,
                         'product_id' => $request->product_id,
-                        'price' => $request->quantity * $product->price,
-                        'quantity' => $request->quantity,
+
+
+                        'quantity' => $request->quantity ?? 1,
                         'product_size' => $request->product_size ?? null,
                         'product_color' => $request->product_color ?? null,
 
                     ];
 
+                    if($request->quantity){
+$data['price']=$request->quantity * $product->price;
+                    }else{
+                        $data['price']= $product->price;
+                    }
                     $cartItem = Cart_item::create($data);
                     array_push($ItemsArray, $cartData->product);
                 }
