@@ -93,9 +93,12 @@
 </li>
 @endif
 </ul>
+@isset($cart)
 @if($cart && $cart->items->count()>0)
 <a href="{{ LaravelLocalization::localizeUrl('/place-order/'.$cart->id) }}" class="btn_1 full-width cart">Proceed to Checkout</a>
 @endif
+@endisset
+
 </div>
 </div>
 </div>
