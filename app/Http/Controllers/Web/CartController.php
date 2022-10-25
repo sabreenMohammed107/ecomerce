@@ -118,10 +118,10 @@ public function fav($id){
             // Enable foreign key checks!
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-            return redirect()->back();
-            // return redirect(' /my-cart/'.$request->user_id);
+            // return redirect()->back();
+            return redirect('/');
 
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with($e->getMessage());
         }
