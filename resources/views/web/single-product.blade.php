@@ -168,7 +168,7 @@
                                 <form id="myfavForm" action="{{ LaravelLocalization::localizeUrl('/add-to-my-fav') }}" method="post">
 
                                 @csrf
-                                <input type="hidden" name="fav_id" value="{{ $offer->id }}">
+                                <input type="hidden" name="fav_id" value="{{ $row->id }}">
                                 <input type="hidden" name="client_id" value="{{ Auth::user()->id }}">
                                 <a
                                 onclick="this.closest('form').submit();return false;" class="tooltip-1" data-bs-toggle="tooltip"
@@ -347,7 +347,7 @@
                                     <form id="myfavForm" action="{{ LaravelLocalization::localizeUrl('/add-to-my-fav') }}" method="post">
 
                                     @csrf
-                                    <input type="hidden" name="fav_id" value="{{ $offer->id }}">
+                                    <input type="hidden" name="fav_id" value="{{ $rel->id }}">
                                     <input type="hidden" name="client_id" value="{{ Auth::user()->id }}">
                                     <a
                                     onclick="this.closest('form').submit();return false;" class="tooltip-1" data-bs-toggle="tooltip"
