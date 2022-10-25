@@ -150,7 +150,7 @@
                                             <input type="hidden" name="product_id" value="{{ $row->id }}">
                                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                             <button class="btn_1"
-                                                onclick="document.getElementById('mycardForm').submit();">{{ __('links.add_cart') }}</button>
+                                            onclick="this.closest('form').submit();return false;" >{{ __('links.add_cart') }}</button>
                                         @else
                                             {{-- <button class="btn_1" onclick="document.getElementById('mycardForm').submit();" >{{ __('links.login') }}</button> --}}
                                             <a class="btn_1" href="{{ route('user-login') }}">{{ __('links.login') }}</a>
@@ -374,7 +374,7 @@
                                             <input type="hidden" name="product_id" value="{{ $rel->id }}">
                                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                             <a
-                                                onclick="document.getElementById('mycardForm').submit();" class="tooltip-1" data-bs-toggle="tooltip"
+                                            onclick="this.closest('form').submit();return false;" class="tooltip-1" data-bs-toggle="tooltip"
                                                 data-bs-placement="left" title="{{ __('links.add_cart') }}"><i
                                                     class="ti-shopping-cart"></i><span></span></a>
 

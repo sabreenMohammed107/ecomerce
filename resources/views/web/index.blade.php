@@ -182,7 +182,7 @@
                                         <input type="hidden" name="product_id" value="{{ $latest->id }}">
                                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                         <a
-                                            onclick="document.getElementById('mycardForm').submit();" class="tooltip-1" data-bs-toggle="tooltip"
+                                        onclick="this.closest('form').submit();return false;" class="tooltip-1" data-bs-toggle="tooltip"
                                             data-bs-placement="left" title="{{ __('links.add_cart') }}"><i
                                                 class="ti-shopping-cart"></i><span></span></a>
 
@@ -291,7 +291,7 @@
                                             <input type="hidden" name="product_id" value="{{ $offer->id }}">
                                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                             <a
-                                                onclick="document.getElementById('mycardForm').submit();" class="tooltip-1" data-bs-toggle="tooltip"
+                                            onclick="this.closest('form').submit();return false;" class="tooltip-1" data-bs-toggle="tooltip"
                                                 data-bs-placement="left" title="{{ __('links.add_cart') }}"><i
                                                     class="ti-shopping-cart"></i><span></span></a>
 
