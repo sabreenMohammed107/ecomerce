@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Lang as Lang;
 class CartController extends Controller
 {
     protected $viewName = 'web.';
-
     public function index($id)
     {
         $user = User::find($id);
@@ -73,17 +72,13 @@ public function fav($id){
                 $cartItem = Cart_item::create($data);
                 array_push($ItemsArray, $cart->product);
             } else {
-                $data2 = [
-                    'user_id' => $request->user_id,
-                    'product_id' => $request->product_id,
-                    'price' => $request->quantity * $product->price,
-                    'quantity' => $request->quantity,
-                    'product_size' => $request->product_size ?? null,
-                    'product_color' => $request->product_color ?? null,
+                $data = [
+                    'user_id' => $user->id,
+
                     'status' => 0,
                 ];
 
-                $cartData = Cart::create($data2);
+                $cartData = Cart::create($data);
 
                 //items
                 if ($cartData) {
@@ -109,22 +104,20 @@ public function fav($id){
             // $cartData->update(['status' => 1]);
             // }
 
-            // $returnData = [
-            //     'user' => $user,
-            //     'items' => $ItemsArray,
-            // ];
+            $returnData = [
+                'user' => $user,
+                'items' => $ItemsArray,
+            ];
 
             DB::commit();
             // Enable foreign key checks!
             DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-            // return redirect()->back();
-            return redirect('/');
+            return redirect()->back();
 
-        } catch (\Exception $e) {
+        } catch (\Exception$e) {
             DB::rollback();
-            dd($e->getMessage());
-            //return redirect()->back()->with($e->getMessage());
+            return redirect()->back()->with($e->getMessage());
         }
     }
     public function storeFav(Request $request)
