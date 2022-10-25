@@ -137,7 +137,7 @@
           <ul class="treeview-menu">
             <li><a href="{{ route('admin-slider.index') }}"><i class="fa fa-circle-o"></i>  الصور الرئيسيه </a></li>
             <li><a href="{{ route('admin-company.index') }}"><i class="fa fa-circle-o"></i> عن الشركه </a></li>
-            <li><a href="{{ route('whyus.index') }}"><i class="fa fa-circle-o"></i> نحن لماذا</a></li>
+            <li><a href="{{ route('whyus.index') }}"><i class="fa fa-circle-o"></i> لماذا نحن</a></li>
               <li><a href="{{ route('admin-company-contact.index') }}"><i class="fa fa-circle-o"></i> التواصل</a></li>
 
           </ul>

@@ -107,15 +107,16 @@ class ProductController extends Controller
             $values['status'] = 0;
         }
 
-       $product= $this->object::create($values); if ($request->hasFile('img')) {
+       $product= $this->object::create($values);
+       if ($request->hasFile('img')) {
         $attach_image = $request->file('img');
 
         $data['img'] = $this->UplaodImage($attach_image);
-
+        $image = Image::create($data);
+        $product->images()->save($image);
     }
     // dd($request->get('regulation_end_date'));
-    $image = Image::create($data);
-      $product->images()->save($image);
+
       DB::commit();
       // Enable foreign key checks!
       DB::statement('SET FOREIGN_KEY_CHECKS=1;');
@@ -204,11 +205,11 @@ class ProductController extends Controller
             $attach_image = $request->file('img');
 
             $data['img'] = $this->UplaodImage($attach_image);
-
+            $image = Image::create($data);
+            $product->images()->sync($image);
         }
         // dd($request->get('regulation_end_date'));
-        $image = Image::create($data);
-          $product->images()->sync($image);
+
           DB::commit();
           // Enable foreign key checks!
           DB::statement('SET FOREIGN_KEY_CHECKS=1;');

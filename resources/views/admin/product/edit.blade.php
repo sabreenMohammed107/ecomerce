@@ -45,11 +45,11 @@
                                                         href="#custom-tabs-one-6" role="tab"
                                                         aria-controls="custom-tabs-one-6" aria-selected="false">المقاسات </a>
                                                 </li>
-                                                <li class="nav-item">
+                                                {{-- <li class="nav-item">
                                                     <a class="nav-link text-dark" id="custom-tabs-one-3-tab" data-toggle="pill"
                                                         href="#custom-tabs-one-3" role="tab"
                                                         aria-controls="custom-tabs-one-3" aria-selected="false">متعلقات</a>
-                                                </li>
+                                                </li> --}}
                                                 <li class="nav-item">
                                                     <a class="nav-link text-dark" id="custom-tabs-one-4-tab" data-toggle="pill"
                                                         href="#custom-tabs-one-4" role="tab"
@@ -125,7 +125,7 @@
                                                                             <select name="category_id" class="form-control" id="">
 
                                                                                 @foreach($categories as $type)
-                                                                                <option value="{{$type->id}}" {{ $product->category_id == $type->id ? 'selected' : '' }}>{{$type->name}}</option>
+                                                                                <option value="{{$type->id}}" {{ $product->category_id == $type->id ? 'selected' : '' }}>{{$type->ar_name}}</option>
                                                                                 @endforeach
                                                                               </select>
                                                                         </div>

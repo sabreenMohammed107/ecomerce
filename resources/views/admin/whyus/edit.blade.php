@@ -1,6 +1,6 @@
 @extends('layout.web')
 
-@section('title', 'بيانات التواصل')
+@section('title', 'لماذا نحن')
 
 @section('content')
 
