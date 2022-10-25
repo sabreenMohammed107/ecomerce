@@ -109,10 +109,10 @@ public function fav($id){
             // $cartData->update(['status' => 1]);
             // }
 
-            $returnData = [
-                'user' => $user,
-                'items' => $ItemsArray,
-            ];
+            // $returnData = [
+            //     'user' => $user,
+            //     'items' => $ItemsArray,
+            // ];
 
             DB::commit();
             // Enable foreign key checks!
