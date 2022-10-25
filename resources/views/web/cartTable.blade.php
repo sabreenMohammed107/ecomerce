@@ -24,7 +24,9 @@
             $rowtotal=0;
              $footTotal=0;
             ?>
-            @if($cart)
+            @isset($cart)
+
+
             @foreach ($cart->items as $index=>$item)
             <?php
             $rowtotal=$item->product->price_after_discount*$item->quantity;
@@ -64,7 +66,7 @@
             </tr>
             @endforeach
 
-@endif
+            @endisset
         </tbody>
     </table>
 

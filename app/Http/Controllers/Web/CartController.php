@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Lang as Lang;
 class CartController extends Controller
 {
     protected $viewName = 'web.';
+
     public function index($id)
     {
         $user = User::find($id);
@@ -44,12 +45,12 @@ public function fav($id){
 
         }
 
-        // DB::beginTransaction();
-        // try
-        // {
+        DB::beginTransaction();
+        try
+        {
 
-        //     // Disable foreign key checks!
-        //     DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+            // Disable foreign key checks!
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
             $user = User::find($request->user_id);
             $cart = Cart::where('user_id', $request->user_id)->where('status', "=", 0)->first();
             $product = Product::where('id', $request->product_id)->first();
@@ -113,16 +114,16 @@ public function fav($id){
                 'items' => $ItemsArray,
             ];
 
-        //     DB::commit();
-        //     // Enable foreign key checks!
-        //     DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+            DB::commit();
+            // Enable foreign key checks!
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        //     return redirect()->back();
+            return redirect()->back();
 
-        // } catch (\Exception$e) {
-        //     DB::rollback();
-        //     return redirect()->back()->with($e->getMessage());
-        // }
+        } catch (\Exception$e) {
+            DB::rollback();
+            return redirect()->back()->with($e->getMessage());
+        }
     }
     public function storeFav(Request $request)
     {
