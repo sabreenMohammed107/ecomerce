@@ -47,6 +47,7 @@ public function fav($id){
         DB::beginTransaction();
         try
         {
+            dd($request->user_id);
             // Disable foreign key checks!
             DB::statement('SET FOREIGN_KEY_CHECKS=0;');
             $user = User::find($request->user_id);
