@@ -152,12 +152,12 @@
                                 @endif</span>
                             </div>
                             <ul>
-                                <li>
+                                  <li>
                                     @if(Auth::user())
                                     <form id="myfavForm" action="{{ LaravelLocalization::localizeUrl('/add-to-my-fav') }}" method="post">
 
                                     @csrf
-                                    <input type="hidden" name="fav_id" value="{{ $offer->id }}">
+                                    <input type="hidden" name="fav_id" value="{{ $latest->id }}">
                                     <input type="hidden" name="client_id" value="{{ Auth::user()->id }}">
                                     <a
                                     onclick="this.closest('form').submit();return false;" class="tooltip-1" data-bs-toggle="tooltip"
@@ -208,8 +208,8 @@
                         <div class="row justify-content-center justify-content-md-start">
                             <div class="col-lg-12 wow animated" data-wow-offset="150" style="visibility: visible;">
 
-                               <a href="https://apps.apple.com/us/app/shesure/id1612969554"><img class="img-store first-store" src="{{asset('comassets/img/apple-store-logo-png-1-transparent.png')}}"></a>
-                               <a href="https://play.google.com/store/apps/details?id=com.shesure.clothesapp"><img class="img-store" src="{{asset('comassets/img/get-it-on-google-play-badge-png-use-unwanted-payg-sim-credit-to-pay-for-apps-on-google-play-gadgetz-tv-2357.png')}}"></a>
+                               <a href="https://apps.apple.com/us/app/KAPOTCHA/id1612969554"><img class="img-store first-store" src="{{asset('comassets/img/apple-store-logo-png-1-transparent.png')}}"></a>
+                               <a href="https://play.google.com/store/apps/details?id=com.KAPOTCHA.clothesapp"><img class="img-store" src="{{asset('comassets/img/get-it-on-google-play-badge-png-use-unwanted-payg-sim-credit-to-pay-for-apps-on-google-play-gadgetz-tv-2357.png')}}"></a>
 
                             </div>
                         </div>
