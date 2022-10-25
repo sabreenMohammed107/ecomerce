@@ -18,7 +18,7 @@
           <!-- Messages: style can be found in dropdown.less-->
 
           <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
+          {{-- <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
               <span class="label label-warning">{{auth()->user()->unreadNotifications()->count()}}</span>
@@ -38,9 +38,8 @@
 
                 </ul>
               </li>
-              {{-- <li class="footer"><a href="#">View all</a></li> --}}
             </ul>
-          </li>
+          </li> --}}
           <!-- Tasks: style can be found in dropdown.less -->
 
           <!-- User Account: style can be found in dropdown.less -->

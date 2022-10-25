@@ -30,7 +30,7 @@
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
 
-        <strong>Copyright &copy; 2020 <a href="http://fekra-web.com">Fekra</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2022 <a href="#"></a>.</strong> All rights reserved.
       </footer>
 
 
