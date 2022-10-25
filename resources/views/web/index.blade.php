@@ -154,7 +154,7 @@
                             <ul>
                                   <li>
                                     @if(Auth::user())
-                                    <form id="myfavForm" action="{{ LaravelLocalization::localizeUrl('/add-to-my-fav') }}" method="post">
+                                    <form id="myfavForm" action="{{ LaravelLocalization::localizeUrl('/add-to-fav') }}" method="post">
 
                                     @csrf
                                     <input type="hidden" name="fav_id" value="{{ $latest->id }}">
@@ -265,7 +265,7 @@
                             <ul>
                                 <li>
                                     @if(Auth::user())
-                                    <form id="myfavForm" action="{{ LaravelLocalization::localizeUrl('/add-to-my-fav') }}" method="post">
+                                    <form id="myfavForm" action="{{ LaravelLocalization::localizeUrl('/add-to-fav') }}" method="post">
 
                                     @csrf
                                     <input type="hidden" name="fav_id" value="{{ $offer->id }}">
