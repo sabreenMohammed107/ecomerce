@@ -31,7 +31,7 @@ public function fav($id){
 }
     public function storeCart(Request $request)
     {
-        dd($request->all());
+
         //exist product
         $exist = Cart_item::where('product_id', $request->product_id)
             ->whereHas('cart', function ($query) use ($request) {
