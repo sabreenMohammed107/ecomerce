@@ -17,7 +17,7 @@
                 <li>Cart</li>
             </ul>
         </div>
-        <h1>{{$user->username}}</h1>
+        <h1>{{$user->username ?? ''}}</h1>
     </div>
     @if(Session::has('flash_success'))
 
