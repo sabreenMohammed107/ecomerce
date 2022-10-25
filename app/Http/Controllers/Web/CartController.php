@@ -124,7 +124,7 @@ public function fav($id){
         } catch (\Exception $e) {
             DB::rollback();
             dd($e->getMessage());
-            return redirect()->back()->with($e->getMessage());
+            //return redirect()->back()->with($e->getMessage());
         }
     }
     public function storeFav(Request $request)
