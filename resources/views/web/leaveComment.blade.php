@@ -17,12 +17,12 @@
                         <h1>تقيم المنتجات</h1>
                         <form action="{{route('saveReview')}}" method="POST">
 
-@csrf
+{{-- @csrf --}}
                             <div class="rating_submit">
                                 <div class="form-group">
                                     <label class="d-block">التقيم</label>
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" name="product_id" value="{!! $product->id !!}">
+                                    <input type="hidden" name="user_id" value="{!! Auth::user()->id !!}">
 
                                     <span class="rating mb-0">
                                         <input type="radio" name="rate_no" class="rating-input" id="5_star"
