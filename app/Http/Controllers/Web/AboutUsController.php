@@ -13,7 +13,7 @@ class AboutUsController extends Controller
     protected $viewName='web.';
     public function index(){
         $company=Company::first();
-        $whyRows=Why_us::take(6)->get();
+        $whyRows=Why_us::get();
         return view($this->viewName.'about',compact('company','whyRows'));
     }
 }
