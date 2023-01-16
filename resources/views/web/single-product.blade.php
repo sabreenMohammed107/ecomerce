@@ -28,7 +28,7 @@
                             <div class="owl-carousel owl-theme thumbs">
                                 @isset($row->images)
                                     @foreach ($row->images as $key => $img)
-                                        <div style="background-image: url({{asset('uploads/attachment')}}/{{$img->img}});"
+                                        <div style="background-image: url({{asset('uploads/attachment/'.$img->img)}});"
                                             class="item {{ $key == 0 ? 'active' : '' }} "></div>
                                     @endforeach
                                 @endisset
