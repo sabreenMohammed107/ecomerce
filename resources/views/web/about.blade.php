@@ -120,7 +120,7 @@
                                     <i class="ti-comments"></i>
                                 @endif
 
-                                <h3> {{$whyRows[$key]->en_title}} @if (LaravelLocalization::getCurrentLocale() === 'en')
+                                <h3 style="color: black"> xxxx{{$whyRows[$key]->en_title}} @if (LaravelLocalization::getCurrentLocale() === 'en')
                                     {{ $rowx->en_title }}
                                 @else
                                     {{ $rowx->ar_title }}
