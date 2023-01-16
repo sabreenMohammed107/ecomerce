@@ -97,7 +97,7 @@
 
                 </div>
                 <div class="row">
-                    @foreach ($whyRows as $key => $rowx)
+                    @foreach ($whyRows as $key=>$rowx)
                         <div class="col-lg-4 col-md-6">
                             <div class="box_feat">
                                 @if ($key == 0)
@@ -120,7 +120,7 @@
                                     <i class="ti-comments"></i>
                                 @endif
 
-                                <h3 style="color: black"> xxxx{{$whyRows[$key]->en_title}} @if (LaravelLocalization::getCurrentLocale() === 'en')
+                                <h3 style="color: black">  @if (LaravelLocalization::getCurrentLocale() === 'en')
                                     {{ $rowx->en_title }}
                                 @else
                                     {{ $rowx->ar_title }}
