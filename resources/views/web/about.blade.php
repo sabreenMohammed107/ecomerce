@@ -119,7 +119,7 @@
                                 @if ($key == 5)
                                     <i class="ti-comments"></i>
                                 @endif
-
+{{$rowx->en_title}}
                                 <h3> @if (LaravelLocalization::getCurrentLocale() === 'en')
                                     {{ $rowx->en_title }}
                                 @else
