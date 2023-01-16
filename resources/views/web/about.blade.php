@@ -97,7 +97,9 @@
 
                 </div>
                 <div class="row">
+
                     @foreach ($whyRows as $key=>$xx)
+                    @dd($xx)
                         <div class="col-lg-4 col-md-6">
                             <div class="box_feat">
                                 @if ($key == 0)
