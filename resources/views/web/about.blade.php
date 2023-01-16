@@ -97,7 +97,7 @@
 
                 </div>
                 <div class="row">
-                    @foreach ($whyRows as $key => $row)
+                    @foreach ($whyRows as $key => $rowx)
                         <div class="col-lg-4 col-md-6">
                             <div class="box_feat">
                                 @if ($key == 0)
@@ -120,14 +120,14 @@
                                 @endif
 
                                 <h3> @if (LaravelLocalization::getCurrentLocale() === 'en')
-                                    {{ $company->en_title }}
+                                    {{ $rowx->en_title }}
                                 @else
-                                    {{ $company->ar_title }}
+                                    {{ $rowx->ar_title }}
                                 @endif</h3>
                                 <p>@if (LaravelLocalization::getCurrentLocale() === 'en')
-                                    {!! $company->en_breif !!}
+                                    {!! $rowx->en_breif !!}
                                 @else
-                                    {!! $company->ar_brief !!}
+                                    {!! $rowx->ar_brief !!}
                                 @endif</p>
                             </div>
                         </div>
