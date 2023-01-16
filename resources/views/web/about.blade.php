@@ -105,6 +105,7 @@
                                 @endif
                                 @if ($key == 1)
                                     <i class="ti-help-alt"></i>
+
                                 @endif
                                 @if ($key == 2)
                                     <i class="ti-gift"></i>
