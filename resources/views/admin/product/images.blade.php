@@ -22,7 +22,7 @@
         @foreach ($attachments as $index=>$row)
         <tr>
             <td>{{ $index + 1 }}</td>
-            <td><img src="{{ public_path('uploads/attachment')}}/{{$row->img}}" widtd="100" height="100" alt="">
+            <td><img src="{{ asset('uploads/attachment')}}/{{$row->img}}" widtd="100" height="100" alt="">
                </td>
 
             <td>
