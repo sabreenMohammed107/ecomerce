@@ -102,6 +102,10 @@
                             <div class="box_feat">
                                 @if ($key == 0)
                                     <i class="ti-medall-alt"></i>
+
+                                <h3 style="color: black">
+                                    {{ $rowx->ar_title }}
+                               </h3>
                                 @endif
                                 @if ($key == 1)
                                     <i class="ti-help-alt"></i>
