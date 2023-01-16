@@ -97,14 +97,14 @@
 
                 </div>
                 <div class="row">
-                    @foreach ($whyRows as $key=>$rowx)
+                    @foreach ($whyRows as $key=>$xx)
                         <div class="col-lg-4 col-md-6">
                             <div class="box_feat">
                                 @if ($key == 0)
                                     <i class="ti-medall-alt"></i>
 
                                 <h3 style="color: black">
-                                    {{ $rowx->ar_title }}
+                                    {{ $xx->ar_title }}
                                </h3>
                                 @endif
                                 @if ($key == 1)
@@ -125,14 +125,14 @@
                                 @endif
 
                                 <h3 style="color: black">  @if (LaravelLocalization::getCurrentLocale() === 'en')
-                                    {{ $rowx->en_title }}
+                                    {{ $xx->en_title }}
                                 @else
-                                    {{ $rowx->ar_title }}
+                                    {{ $xx->ar_title }}
                                 @endif</h3>
                                 <p>@if (LaravelLocalization::getCurrentLocale() === 'en')
-                                    {!! $rowx->en_breif !!}
+                                    {!! $xx->en_breif !!}
                                 @else
-                                    {!! $rowx->ar_brief !!}
+                                    {!! $xx->ar_brief !!}
                                 @endif</p>
                             </div>
                         </div>
