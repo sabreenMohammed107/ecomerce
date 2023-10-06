@@ -97,7 +97,7 @@
 
                 </div>
                 <div class="row">
-                    @dd($whyRows)
+
                     @foreach ($whyRows as $key=>$xx)
 
                         <div class="col-lg-4 col-md-6">
@@ -105,9 +105,7 @@
                                 @if ($key == 0)
                                     <i class="ti-medall-alt"></i>
 
-                                <h3 style="color: black">
-                                    {{ $xx->ar_title }}
-                               </h3>
+
                                 @endif
                                 @if ($key == 1)
                                     <i class="ti-help-alt"></i>
