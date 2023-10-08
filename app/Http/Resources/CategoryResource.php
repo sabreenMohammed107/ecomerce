@@ -24,7 +24,7 @@ class CategoryResource extends JsonResource
             "en_description" => $this->en_description !==null ? strip_tags($this->en_description) : '' ,
             // "images"=> asset('uploads/home_sliders/' . $this->images[0]) ?? '',
 
-            "images"=> ProImageResource::make($this->images),
+            "images"=> ProImageResource::make($this->images[0]),
             // ProImageResource::collection($this->images),
 
 
