@@ -17,13 +17,15 @@ class CategoryResource extends JsonResource
     {
         return [
             "item_id" => $this->id,
-            "ar-name" => $this->ar_name !==null ? $this->ar_name : '',
-            "en-name" => $this->en_name !==null ? $this->en_name : '',
+            "ar_name" => $this->ar_name !==null ? $this->ar_name : '',
+            "en_name" => $this->en_name !==null ? $this->en_name : '',
 
-            "ar-description" => $this->ar_description !==null ? strip_tags($this->ar_description) : '' ,
-            "en-description" => $this->en_description !==null ? strip_tags($this->en_description) : '' ,
+            "ar_description" => $this->ar_description !==null ? strip_tags($this->ar_description) : '' ,
+            "en_description" => $this->en_description !==null ? strip_tags($this->en_description) : '' ,
+            "images"=> asset('uploads/home_sliders/' . $this->images[0]) ?? '',
 
-            "images"=> ProImageResource::collection($this->images),
+            // "images"=> ProImageResource::make($this->images),
+            // ProImageResource::collection($this->images),
 
 
             ];
