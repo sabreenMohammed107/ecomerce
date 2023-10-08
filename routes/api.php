@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ReactDataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,8 @@ Route::middleware('auth:api')->get('user', function (Request $request) {
 // react apis workshop
  Route::get('home', [ReactDataController::class, 'home']);
 
+  Route::post('register', [AuthController::class, 'register']);
+ Route::post('login', [AuthController::class, 'login']);
 //slider - offers
 
 // Route::post('register', 'App\Http\Controllers\Api\AuthController@register');
