@@ -31,7 +31,7 @@ class ProductResource extends JsonResource
             "details"=> DetailsResource::collection($this->details),
             // "color"=>ColorResource::collection($this->color)->toJson(),
             "color"=>ColorResource::collection($this->color),
-            "images"=>ProImageResource::collection( implode(',', $this->images->toArray())),
+            "images"=>ProImageResource::collection( implode(',', $this->images)),
 
 
             ];
