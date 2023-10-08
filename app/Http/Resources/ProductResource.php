@@ -30,7 +30,7 @@ class ProductResource extends JsonResource
             'review'=>ReviewResource::collection($this->review),
             "details"=> DetailsResource::collection($this->details),
             "color"=> ColorResource::collection($this->color)->implode('color_id', ','),
-            "images"=> (ProImageResource::collection($this->images))->implode('image', ','),
+            "images"=> ProImageResource::collection($this->images)->implode('image', ','),
 
 
             ];
