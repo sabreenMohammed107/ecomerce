@@ -29,8 +29,8 @@ class ProductResource extends JsonResource
             "sizes"=> SizeResource::collection($this->sizes),
             'review'=>ReviewResource::collection($this->review),
             "details"=> DetailsResource::collection($this->details),
-            "color"=> ColorResource::make($this->color->toArray()),
-            "images"=> (ProImageResource::collection($this->images))->implode(','),
+            "color"=>json_decode($this->color),
+            "images"=> ProImageResource::collection($this->images),
 
 
             ];
