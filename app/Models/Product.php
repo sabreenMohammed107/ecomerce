@@ -62,6 +62,12 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\Product_component');
     }
+    protected $appends = ['avg_rate'];
+
+    public function getAvgRateAttribute()
+{
+    return round($this->review()->avg('rate_no'),1);
+}
     public function avgRating()
 {
     return round($this->review()->avg('rate_no'),1);
