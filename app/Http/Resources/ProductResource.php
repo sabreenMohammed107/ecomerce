@@ -17,8 +17,8 @@ class ProductResource extends JsonResource
     {
         return [
             "item_id" => $this->id,
-            "item_ar_name" => $this->ar_name !==null ? $this->ar_name : '',
-            "item_en_name" => $this->ar_name !==null ? $this->en_name : '',
+            "ar_name" => $this->ar_name !==null ? $this->ar_name : '',
+            "en_name" => $this->ar_name !==null ? $this->en_name : '',
             "ar_description" => $this->ar_description !==null ? strip_tags($this->ar_description) : '' ,
             "en_description" => $this->en_description !==null ? strip_tags($this->en_description) : '' ,
             "price" =>number_format((float) $this->price, 1)  ?? '',
@@ -27,7 +27,7 @@ class ProductResource extends JsonResource
             'category'=>CategoryResource::make($this->category),
                "rate"=> $this->rate,
             "sizes"=> SizeResource::collection($this->sizes),
-            'review'=>ReviewResource::collection($this->review),
+            // 'review'=>ReviewResource::collection($this->review),
             "details"=> DetailsResource::collection($this->details),
             "color"=>ColorResource::collection($this->color),
             "images"=> ProImageResource::collection($this->images),
