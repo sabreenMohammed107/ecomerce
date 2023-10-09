@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ReactCartController;
 use App\Http\Controllers\Api\ReactDataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,20 @@ Route::middleware('auth:api')->get('user', function (Request $request) {
 
   Route::post('register', [AuthController::class, 'register']);
  Route::post('login', [AuthController::class, 'login']);
+
+Route::middleware('auth:api')->group(function () {
+
+    Route::post('add-to-cart',  [ReactCartController::class, 'storeCart']);
+    Route::get('cart', [ReactCartController::class, 'cart']);
+    Route::get('add-qty/{id}', [ReactCartController::class, 'AddQuantity']);
+    Route::get('sub-qty/{id}', [ReactCartController::class, 'SubstractQuantity']);
+    Route::get('del-product/{id}', [ReactCartController::class, 'deleteProduct']);
+});
+
+
+
+
+
 //slider - offers
 
 // Route::post('register', 'App\Http\Controllers\Api\AuthController@register');
