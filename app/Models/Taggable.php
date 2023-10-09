@@ -22,4 +22,10 @@ class Taggable extends Model
     // {
     //     return $this->morphedByMany(Category::class, 'taggable');
     // }
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class, 'img');
+    }
+
 }
