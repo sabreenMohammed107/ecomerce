@@ -27,8 +27,8 @@ class HomeSliderResource extends JsonResource
 
             "order" => $this->order ?? '',
             "active" => $this->active ?? '',
-            "product"=> ProductResource::make($this->product),
-            'category'=>CategoryResource::make($this->category),
+            // "product"=> ProductResource::make($this->product),
+            // 'category'=>CategoryResource::make($this->category),
 
             "image"=> asset('uploads/home_sliders/'.$this->image),
 
