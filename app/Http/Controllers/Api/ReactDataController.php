@@ -23,9 +23,9 @@ class ReactDataController extends BaseController
         $categories = Category::get();
         $page['categories'] = CategoryResource::collection($categories);
         $products = Product::take(8)->get();
-        $page['products'] = ProResource::collection($products);
+        $page['products'] = ProductResource::collection($products);
         $offers = Product::whereNotNull('discount')->get();
-        $page['offers'] = ProResource::collection($offers);
+        $page['offers'] = ProductResource::collection($offers);
 
         return $this->sendResponse($page, "get all home data ");
     }
