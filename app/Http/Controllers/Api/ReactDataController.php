@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\HomeSliderResource;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProResource;
 use App\Models\Category;
 use App\Models\Home_slider;
 use App\Models\Product;
@@ -22,9 +23,9 @@ class ReactDataController extends BaseController
         $categories = Category::get();
         $page['categories'] = CategoryResource::collection($categories);
         $products = Product::take(8)->get();
-        $page['products'] = ProductResource::collection($products);
+        $page['products'] = ProResource::collection($products);
         $offers = Product::whereNotNull('discount')->get();
-        $page['offers'] = ProductResource::collection($offers);
+        $page['offers'] = ProResource::collection($offers);
 
         return $this->sendResponse($page, "get all home data ");
     }
