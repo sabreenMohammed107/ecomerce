@@ -22,7 +22,7 @@ class ProResource extends JsonResource
             'price'=>$this->price ?? '',
             'discount'=>$this->discount ?? '',
             'price_after_discount'=>$this->price_after_discount ?? '',
-
+            "rate"=> $this->avgRating  ?? 0,
             ];
     }
 }
