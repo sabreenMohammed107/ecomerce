@@ -30,7 +30,7 @@ class HomeSliderResource extends JsonResource
             "product"=> ProductResource::make($this->product),
             'category'=>CategoryResource::make($this->category),
 
-            "image"=> asset('uploads/home_sliders/'.$this->image) ?? '',
+            "img"=> asset('uploads/home_sliders/'.$this->image),
 
 
             ];
