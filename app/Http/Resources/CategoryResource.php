@@ -22,7 +22,7 @@ class CategoryResource extends JsonResource
 
             "ar_description" => $this->ar_description !==null ? strip_tags($this->ar_description) : '' ,
             "en_description" => $this->en_description !==null ? strip_tags($this->en_description) : '' ,
-            "images"=> asset('uploads/attachment/' . $this->images['img']) ?? '',
+            "images"=> asset('uploads/attachment/' . $this->images[0]->img) ?? '',
 
             // "images"=> ProImageResource::make($this->images),
             // ProImageResource::collection($this->images),
