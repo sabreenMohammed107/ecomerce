@@ -27,6 +27,10 @@ Route::middleware('auth:api')->get('user', function (Request $request) {
 // react apis workshop
  Route::get('home', [ReactDataController::class, 'home']);
 
+ Route::get('ProductsByCat/{id}', [ReactDataController::class, 'ProductsByCat']);
+ Route::get('show-product/{id}', [ReactDataController::class, 'singlePro']);
+ Route::get('search/{str}', [ReactDataController::class, 'search']);
+
   Route::post('register', [AuthController::class, 'register']);
  Route::post('login', [AuthController::class, 'login']);
 

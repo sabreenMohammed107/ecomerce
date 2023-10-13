@@ -14,6 +14,11 @@ use App\Models\Product;
 class ReactDataController extends BaseController
 {
 
+    /**
+    *  Display a listing of the data in home page.
+    *
+    * @return json Response
+    */
     public function home(){
         $page = [];
 
@@ -28,5 +33,63 @@ class ReactDataController extends BaseController
         $page['offers'] = ProductResource::collection($offers);
 
         return $this->sendResponse($page, "get all home data ");
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return json Response
+     */
+    public function singlePro($id){
+
+
+        try
+        {
+            $product=Product::with('sizes','color','details','review')->where('id','=',$id)->first();
+            $product->rate=$product->avgRating();
+            $product->images=$product->images;
+            if($product){
+
+                return $this->sendResponse(ProductResource::make($product), 'Geting Product successfully.');
+            }
+            else
+            {
+                return $this->sendError('Invalid Product !');
+            }
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), 'Error happens!!');
+        }
+    }
+
+    /**
+     * Display ta listing of the data.
+     *
+     * @param  string  $str
+     * @return json Response
+     */
+    public function search($str){
+        if($str) {
+            $search = $str;
+
+            $products=Product::where('ar_name','LIKE',"%$search%")->orWhere('en_name','LIKE',"%$search%")
+            ->orwhereHas('category', function ($query) use ($search){
+                $query->where('ar_name','LIKE',"%$search%")->orWhere('en_name','LIKE',"%$search%");
+            })->get();
+            return $this->sendResponse(ProductResource::collection($products), 'All Search result Retrieved  Successfully');
+        }else{
+            return $this->sendError('Error', 'Enter Search name !!');
+        }
+    }
+
+ /**
+     * Display ta listing of the Products By Category Id.
+     *
+     * @param  int  $id
+     * @return json Response
+     */
+    public function ProductsByCat($id){
+        $products = Product::where('category_id',$id)->get();
+
+        return $this->sendResponse(ProductResource::collection($products), 'All products Retrieved  Successfully');
     }
 }
