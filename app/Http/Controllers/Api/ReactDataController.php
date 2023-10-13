@@ -10,6 +10,7 @@ use App\Http\Resources\ProResource;
 use App\Models\Category;
 use App\Models\Home_slider;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ReactDataController extends BaseController
 {
@@ -67,9 +68,9 @@ class ReactDataController extends BaseController
      * @param  string  $str
      * @return json Response
      */
-    public function search($str){
-        if($str) {
-            $search = $str;
+    public function search(Request $request){
+        if($request->get('str')) {
+            $search = $request->get('str');
 
             $products=Product::where('ar_name','LIKE',"%$search%")->orWhere('en_name','LIKE',"%$search%")
             ->orwhereHas('category', function ($query) use ($search){
