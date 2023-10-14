@@ -29,6 +29,8 @@ Route::middleware('auth:api')->get('user', function (Request $request) {
 
  Route::get('ProductsByCat/{id}', [ReactDataController::class, 'ProductsByCat']);
  Route::get('show-product/{id}', [ReactDataController::class, 'singlePro']);
+ Route::get('/fetchProduct', [ReactDataController::class, 'fetch_product']);
+
  Route::get('search', [ReactDataController::class, 'search']);
 
   Route::post('register', [AuthController::class, 'register']);

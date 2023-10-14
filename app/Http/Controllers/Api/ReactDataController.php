@@ -93,4 +93,48 @@ class ReactDataController extends BaseController
 
         return $this->sendResponse(ProductResource::collection($products), 'All products Retrieved  Successfully');
     }
+
+
+ /**
+     * Display ta listing of the Products ByFilter.
+     *
+     *
+     * @return json Response
+     */
+    public function fetch_product(Request $request)
+    {
+        // dd($request->all());
+        \Log::info($request->all());
+
+        if ($request->ajax()) {
+            $filtters = Product::where('category_id', $request->get('category'));
+
+            if (!empty($request->get("sizes"))) {
+
+                $filtters->with('sizes')->whereHas('sizes', function ($query) use ($request) {
+                    $query->whereIn('product_sizes.id', $request->get("sizes"));
+                });
+            }
+            if (!empty($request->get("colors"))) {
+                $filtters->whereHas('color', function ($query) use ($request) {
+                    $query->whereIn('product_colors.id', $request->get("colors"));
+                });
+            }
+
+            if (!empty($request->get("prices"))) {
+                // $filtters->whereIn('price_after_discount', '<=', $request->get("prices"));
+               $filtters->where('price_after_discount', '<=', (double) $request->get("prices")[0]);
+                $filtters->where('price_after_discount', '>=', (double) $request->get("prices")[0] - 100);
+                //$filtters->whereBetween('price_after_discount', $request->get("prices"));
+            }
+            // if (!empty($request->get("prices"))) {
+            //     $filtters->whereIn('price_after_discount', '>=', $request->get("prices")[0]);
+            // }
+
+            $products = $filtters->get();
+
+            return $this->sendResponse(ProductResource::collection($products), 'All products Retrieved  Successfully');
+
+        }
+    }
 }
