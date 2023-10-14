@@ -121,7 +121,7 @@ class ReactDataController extends BaseController
                 $arr = explode(',', $request->get("sizes"));
                 if (count($arr) > 0) {
 
-                    $filtters->join('products', 'product_sizes.product_id', '=', 'products.id')
+                    $filtters->join('product_sizes', 'product_sizes.product_id', '=', 'products.id')
                     ->whereHas('sizes', function ($q) use ($arr) {
                         $q->where('product_sizes.id', $arr);
                     });
