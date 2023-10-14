@@ -120,7 +120,7 @@ class ReactDataController extends BaseController
                 // $r = json_decode($request->get("sizes"), true);
                 $arr = explode(',', $request->get("sizes"));
                 if (count($arr) > 0) {
-
+dd($arr);
                     $filtters->with('sizes')->whereHas('sizes', function ($query) use ($arr) {
                         $query->whereIn('product_sizes.id', $arr);
                     });
