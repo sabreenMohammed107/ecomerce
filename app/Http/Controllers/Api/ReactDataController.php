@@ -119,15 +119,24 @@ class ReactDataController extends BaseController
             $filtters = Product::where('category_id', $request->get('category'));
 
             if (!empty($request->get("sizes"))) {
+                $r = json_decode($request->get("sizes"), true);
+                if (count($r) > 0) {
 
-                $filtters->with('sizes')->whereHas('sizes', function ($query) use ($request) {
-                    $query->whereIn('product_sizes.id', $request->get("sizes"));
-                });
+                    $filtters->with('sizes')->whereHas('sizes', function ($query) use ($r) {
+                        $query->whereIn('product_sizes.id', $r);
+                    });
+                }
+
             }
             if (!empty($request->get("colors"))) {
-                $filtters->whereHas('color', function ($query) use ($request) {
-                    $query->whereIn('product_colors.id', $request->get("colors"));
-                });
+                $c = json_decode($request->get("colors"), true);
+                if (count($c) > 0) {
+
+                    $filtters->whereHas('color', function ($query) use ($c) {
+                        $query->whereIn('product_colors.id', $c);
+                    });
+                }
+
             }
 
             if (!empty($request->get("prices"))) {
