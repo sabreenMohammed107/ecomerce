@@ -112,8 +112,7 @@ class ReactDataController extends BaseController
      */
     public function fetch_product(Request $request)
     {
-        // dd($request->all());
-        \Log::info($request->all());
+         dd($request->all());
 
 
             $filtters = Product::where('category_id', $request->get('category'));
