@@ -121,17 +121,9 @@ class ReactDataController extends BaseController
                 $arr = explode(',', $request->get("sizes"));
                 if (count($arr) > 0) {
 
-                    $filtters->join('product_sizes', 'product_sizes.product_id', '=', 'products.id')->whereIN('product_sizes.id', $arr);
-                    // ->whereHas('sizes', function ($q) use ($arr) {
-                    //     $q->whereIN('product_sizes.id', $arr);
-                    // });
-
-
-
-
-                    // ->with('sizes')->whereHas('sizes', function ($query) use ($arr) {
-                    //     $query->whereIn('product_sizes.id', $arr);
-                    // });
+                    $filtters->with('sizes')->whereHas('sizes', function ($query) use ($arr) {
+                        $query->whereIn('product_sizes.id', $arr);
+                    });
                 }
 
             }
