@@ -106,7 +106,7 @@ class ReactDataController extends BaseController
         // dd($request->all());
         \Log::info($request->all());
 
-        if ($request->ajax()) {
+
             $filtters = Product::where('category_id', $request->get('category'));
 
             if (!empty($request->get("sizes"))) {
@@ -135,6 +135,6 @@ class ReactDataController extends BaseController
 
             return $this->sendResponse(ProductResource::collection($products), 'All products Retrieved  Successfully');
 
-        }
+
     }
 }
