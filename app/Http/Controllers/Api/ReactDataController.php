@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\ColorResource;
 use App\Http\Resources\HomeSliderResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProResource;
+use App\Http\Resources\SizeResource;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Home_slider;
 use App\Models\Product;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class ReactDataController extends BaseController
@@ -89,9 +93,14 @@ class ReactDataController extends BaseController
      * @return json Response
      */
     public function ProductsByCat($id){
+        $page = [];
         $products = Product::where('category_id',$id)->get();
-
-        return $this->sendResponse(ProductResource::collection($products), 'All products Retrieved  Successfully');
+        $page['products'] = ProductResource::collection($products);
+        $sizes = Size::get();
+        $colors = Color::get();
+        $page['sizes'] = SizeResource::collection($sizes);
+        $page['colors'] = ColorResource::collection($colors);
+        return $this->sendResponse($page, "get all products data ");
     }
 
 
