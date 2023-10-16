@@ -31,7 +31,9 @@ class Product extends Model
     {
         return $this->morphToMany(Image::class, 'taggable');
     }
-
+    // protected $casts = [
+    //     'images' => 'array',
+    // ];
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');

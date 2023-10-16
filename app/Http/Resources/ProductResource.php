@@ -15,6 +15,10 @@ class ProductResource extends JsonResource
      */
     public function toArray($request)
     {
+        $posts = $this->images->pluck('img');
+foreach($posts AS $index => $image){
+  $posts[$index] = url("/uploads/attachment/".$image);
+}
         return [
             "item_id" => $this->id,
             "ar_name" => $this->ar_name !==null ? $this->ar_name : '',
@@ -30,7 +34,8 @@ class ProductResource extends JsonResource
             // 'review'=>ReviewResource::collection($this->review),
             "details"=> DetailsResource::collection($this->details),
             "color"=>ColorResource::collection($this->color),
-            "images"=> ProImageResource::collection($this->images),
+            //"images"=> ProImageResource::collection($this->images)->all(),
+            "images"=>$posts,
 
 
             ];
