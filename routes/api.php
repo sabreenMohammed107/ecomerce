@@ -37,7 +37,7 @@ Route::middleware('auth:api')->get('user', function (Request $request) {
  Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
-
+    Route::post('token-update', [AuthController::class, 'tokenUpdate']);
     Route::post('add-to-cart',  [ReactCartController::class, 'storeCart']);
     Route::get('cart', [ReactCartController::class, 'cart']);
     Route::get('add-qty/{id}', [ReactCartController::class, 'AddQuantity']);
