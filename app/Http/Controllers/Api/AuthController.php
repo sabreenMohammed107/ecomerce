@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Device;
+use App\Models\Device;
 use App\Http\Controllers\Api\BaseController;
 use App\Models\Helper;
 use App\Models\User;
